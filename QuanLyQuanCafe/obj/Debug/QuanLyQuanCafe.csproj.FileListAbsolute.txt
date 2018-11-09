@@ -23,3 +23,15 @@ C:\Users\VOSONHIEP\Desktop\QuanLyCaFe\QLCF\QuanLyQuanCafe\QuanLyQuanCafe\obj\Deb
 C:\Users\VOSONHIEP\Desktop\QuanLyCaFe\QLCF\QuanLyQuanCafe\QuanLyQuanCafe\obj\Debug\QuanLyQuanCafe.csproj.GenerateResource.Cache
 C:\Users\VOSONHIEP\Desktop\QuanLyCaFe\QLCF\QuanLyQuanCafe\QuanLyQuanCafe\bin\Debug\QuanLyQuanCafe.exe
 C:\Users\VOSONHIEP\Desktop\QuanLyCaFe\QLCF\QuanLyQuanCafe\QuanLyQuanCafe\bin\Debug\QuanLyQuanCafe.pdb
+E:\Data_Object_Source\QuanLyQuanCafe\QuanLyQuanCF\QuanLyQuanCafe\bin\Debug\QuanLyQuanCafe.exe.config
+E:\Data_Object_Source\QuanLyQuanCafe\QuanLyQuanCF\QuanLyQuanCafe\obj\Debug\QuanLyQuanCafe.exe
+E:\Data_Object_Source\QuanLyQuanCafe\QuanLyQuanCF\QuanLyQuanCafe\obj\Debug\QuanLyQuanCafe.pdb
+E:\Data_Object_Source\QuanLyQuanCafe\QuanLyQuanCF\QuanLyQuanCafe\bin\Debug\QuanLyQuanCafe.exe
+E:\Data_Object_Source\QuanLyQuanCafe\QuanLyQuanCF\QuanLyQuanCafe\bin\Debug\QuanLyQuanCafe.pdb
+E:\Data_Object_Source\QuanLyQuanCafe\QuanLyQuanCF\QuanLyQuanCafe\obj\Debug\QuanLyQuanCafe.csprojResolveAssemblyReference.cache
+E:\Data_Object_Source\QuanLyQuanCafe\QuanLyQuanCF\QuanLyQuanCafe\obj\Debug\QuanLyQuanCafe.fAccountProfile.resources
+E:\Data_Object_Source\QuanLyQuanCafe\QuanLyQuanCF\QuanLyQuanCafe\obj\Debug\QuanLyQuanCafe.fAdmin.resources
+E:\Data_Object_Source\QuanLyQuanCafe\QuanLyQuanCF\QuanLyQuanCafe\obj\Debug\QuanLyQuanCafe.fTableManager.resources
+E:\Data_Object_Source\QuanLyQuanCafe\QuanLyQuanCF\QuanLyQuanCafe\obj\Debug\QuanLyQuanCafe.fLogin.resources
+E:\Data_Object_Source\QuanLyQuanCafe\QuanLyQuanCF\QuanLyQuanCafe\obj\Debug\QuanLyQuanCafe.Properties.Resources.resources
+E:\Data_Object_Source\QuanLyQuanCafe\QuanLyQuanCF\QuanLyQuanCafe\obj\Debug\QuanLyQuanCafe.csproj.GenerateResource.Cache
