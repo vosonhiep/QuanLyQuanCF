@@ -105,6 +105,7 @@
             this.panel24 = new System.Windows.Forms.Panel();
             this.btnResetPassword = new System.Windows.Forms.Button();
             this.panel26 = new System.Windows.Forms.Panel();
+            this.nmAccountType = new System.Windows.Forms.NumericUpDown();
             this.label10 = new System.Windows.Forms.Label();
             this.panel27 = new System.Windows.Forms.Panel();
             this.txbDisplayName = new System.Windows.Forms.TextBox();
@@ -114,7 +115,11 @@
             this.label12 = new System.Windows.Forms.Label();
             this.panel29 = new System.Windows.Forms.Panel();
             this.dtgvAccount = new System.Windows.Forms.DataGridView();
-            this.nmAccountType = new System.Windows.Forms.NumericUpDown();
+            this.txbPage = new System.Windows.Forms.TextBox();
+            this.btnPrevious = new System.Windows.Forms.Button();
+            this.btnLast = new System.Windows.Forms.Button();
+            this.btnNext = new System.Windows.Forms.Button();
+            this.btnFirst = new System.Windows.Forms.Button();
             this.tcAdmin.SuspendLayout();
             this.tpBill.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -151,11 +156,11 @@
             this.panel23.SuspendLayout();
             this.panel24.SuspendLayout();
             this.panel26.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nmAccountType)).BeginInit();
             this.panel27.SuspendLayout();
             this.panel28.SuspendLayout();
             this.panel29.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtgvAccount)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nmAccountType)).BeginInit();
             this.SuspendLayout();
             // 
             // tcAdmin
@@ -219,6 +224,11 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.txbPage);
+            this.panel1.Controls.Add(this.btnPrevious);
+            this.panel1.Controls.Add(this.btnLast);
+            this.panel1.Controls.Add(this.btnNext);
+            this.panel1.Controls.Add(this.btnFirst);
             this.panel1.Controls.Add(this.dtgvBill);
             this.panel1.Location = new System.Drawing.Point(7, 41);
             this.panel1.Name = "panel1";
@@ -231,7 +241,7 @@
             this.dtgvBill.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dtgvBill.Location = new System.Drawing.Point(3, 3);
             this.dtgvBill.Name = "dtgvBill";
-            this.dtgvBill.Size = new System.Drawing.Size(714, 402);
+            this.dtgvBill.Size = new System.Drawing.Size(714, 365);
             this.dtgvBill.TabIndex = 0;
             // 
             // tbFood
@@ -891,6 +901,13 @@
             this.panel26.Size = new System.Drawing.Size(281, 31);
             this.panel26.TabIndex = 3;
             // 
+            // nmAccountType
+            // 
+            this.nmAccountType.Location = new System.Drawing.Point(129, 3);
+            this.nmAccountType.Name = "nmAccountType";
+            this.nmAccountType.Size = new System.Drawing.Size(51, 20);
+            this.nmAccountType.TabIndex = 1;
+            // 
             // label10
             // 
             this.label10.AutoSize = true;
@@ -969,12 +986,55 @@
             this.dtgvAccount.Size = new System.Drawing.Size(417, 373);
             this.dtgvAccount.TabIndex = 0;
             // 
-            // nmAccountType
+            // txbPage
             // 
-            this.nmAccountType.Location = new System.Drawing.Point(129, 3);
-            this.nmAccountType.Name = "nmAccountType";
-            this.nmAccountType.Size = new System.Drawing.Size(51, 20);
-            this.nmAccountType.TabIndex = 1;
+            this.txbPage.Location = new System.Drawing.Point(102, 376);
+            this.txbPage.Name = "txbPage";
+            this.txbPage.Size = new System.Drawing.Size(71, 20);
+            this.txbPage.TabIndex = 10;
+            this.txbPage.Text = "1";
+            this.txbPage.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txbPage.TextChanged += new System.EventHandler(this.txbPage_TextChanged);
+            // 
+            // btnPrevious
+            // 
+            this.btnPrevious.Location = new System.Drawing.Point(289, 374);
+            this.btnPrevious.Name = "btnPrevious";
+            this.btnPrevious.Size = new System.Drawing.Size(75, 23);
+            this.btnPrevious.TabIndex = 9;
+            this.btnPrevious.Text = "Previous";
+            this.btnPrevious.UseVisualStyleBackColor = true;
+            this.btnPrevious.Click += new System.EventHandler(this.btnPrevious_Click);
+            // 
+            // btnLast
+            // 
+            this.btnLast.Location = new System.Drawing.Point(451, 374);
+            this.btnLast.Name = "btnLast";
+            this.btnLast.Size = new System.Drawing.Size(75, 23);
+            this.btnLast.TabIndex = 8;
+            this.btnLast.Text = "Last";
+            this.btnLast.UseVisualStyleBackColor = true;
+            this.btnLast.Click += new System.EventHandler(this.btnLast_Click);
+            // 
+            // btnNext
+            // 
+            this.btnNext.Location = new System.Drawing.Point(370, 374);
+            this.btnNext.Name = "btnNext";
+            this.btnNext.Size = new System.Drawing.Size(75, 23);
+            this.btnNext.TabIndex = 7;
+            this.btnNext.Text = "Next";
+            this.btnNext.UseVisualStyleBackColor = true;
+            this.btnNext.Click += new System.EventHandler(this.btnNext_Click);
+            // 
+            // btnFirst
+            // 
+            this.btnFirst.Location = new System.Drawing.Point(208, 374);
+            this.btnFirst.Name = "btnFirst";
+            this.btnFirst.Size = new System.Drawing.Size(75, 23);
+            this.btnFirst.TabIndex = 6;
+            this.btnFirst.Text = "First";
+            this.btnFirst.UseVisualStyleBackColor = true;
+            this.btnFirst.Click += new System.EventHandler(this.btnFirst_Click);
             // 
             // fAdmin
             // 
@@ -988,6 +1048,7 @@
             this.tpBill.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtgvBill)).EndInit();
             this.tbFood.ResumeLayout(false);
             this.panel6.ResumeLayout(false);
@@ -1032,13 +1093,13 @@
             this.panel24.ResumeLayout(false);
             this.panel26.ResumeLayout(false);
             this.panel26.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nmAccountType)).EndInit();
             this.panel27.ResumeLayout(false);
             this.panel27.PerformLayout();
             this.panel28.ResumeLayout(false);
             this.panel28.PerformLayout();
             this.panel29.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dtgvAccount)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nmAccountType)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1132,5 +1193,10 @@
         private System.Windows.Forms.Panel panel29;
         private System.Windows.Forms.DataGridView dtgvAccount;
         private System.Windows.Forms.NumericUpDown nmAccountType;
+        private System.Windows.Forms.TextBox txbPage;
+        private System.Windows.Forms.Button btnPrevious;
+        private System.Windows.Forms.Button btnLast;
+        private System.Windows.Forms.Button btnNext;
+        private System.Windows.Forms.Button btnFirst;
     }
 }
