@@ -141,10 +141,30 @@ namespace QuanLyQuanCafe
         {
             fAdmin f = new fAdmin();
             f.loginAccount = LoginAccount;
+            
             f.InsertFood += f_InsertFood;
             f.UpdateFood += f_UpdateFood;
             f.DeleteFood += f_DeleteFood;
+
+            f.InsertCategory += f_InsertCategory;
+            f.UpdateCategory += f_UpdateCategory;
+            f.DeleteCategory += f_DeleteCategory;
             f.ShowDialog();
+        }
+
+        void f_DeleteCategory(object sender, EventArgs e)
+        {
+            LoadCategory();
+        }
+
+        void f_UpdateCategory(object sender, EventArgs e)
+        {
+            LoadCategory();
+        }
+
+        void f_InsertCategory(object sender, EventArgs e)
+        {
+            LoadCategory();
         }
 
         void f_DeleteFood(object sender, EventArgs e)

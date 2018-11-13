@@ -16,6 +16,7 @@ namespace QuanLyQuanCafe.DTO
             this.Name = name;
             this.CategoryID = categoryID;
             this.Price = price;
+            this.IsUsed = true;
         }
 
         public Food(DataRow row)
@@ -24,6 +25,7 @@ namespace QuanLyQuanCafe.DTO
             this.Name = row["name"].ToString();
             this.CategoryID = (int)row["idcategory"];
             this.Price = (float)Convert.ToDouble(row["price"].ToString());
+            this.IsUsed = (bool)row["isUsed"];
         }
 
         private int iD;
@@ -53,6 +55,14 @@ namespace QuanLyQuanCafe.DTO
         {
             get { return price; }
             set { price = value; }
+        }
+
+        private bool isUsed;
+
+        public bool IsUsed
+        {
+            get { return isUsed; }
+            set { isUsed = value; }
         }
     }
 }

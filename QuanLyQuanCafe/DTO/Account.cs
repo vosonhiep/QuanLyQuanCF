@@ -16,6 +16,7 @@ namespace QuanLyQuanCafe.DTO
             this.DisplayName = displayName;
             this.Type = type;
             this.Password = password;
+            this.IsUsed = true;
         }
 
         public Account(DataRow row)
@@ -24,6 +25,7 @@ namespace QuanLyQuanCafe.DTO
             this.DisplayName = row["displayName"].ToString();
             this.Type = (int)row["type"];
             this.Password = row["password"].ToString();
+            this.IsUsed = (bool)row["isUsed"];
         }
         private string userName;
 
@@ -52,6 +54,14 @@ namespace QuanLyQuanCafe.DTO
         {
             get { return type; }
             set { type = value; }
+        }
+
+        private bool isUsed;
+
+        public bool IsUsed
+        {
+            get { return isUsed; }
+            set { isUsed = value; }
         }
     }
 }

@@ -27,7 +27,7 @@ namespace QuanLyQuanCafe
             }
         }
 
-        public bool Login(string userName, string passWord)
+        public int Login(string userName, string passWord)
         {
             return AccountDAO.Instance.Login(userName, passWord);
         }
@@ -36,7 +36,8 @@ namespace QuanLyQuanCafe
         {
             string userName = txbUsername.Text;
             string passWord = txbPassword.Text;
-            if (Login(userName,passWord))
+            int rs = Login(userName, passWord);
+            if (rs == 1)
             {
                 Account loginAccount = AccountDAO.Instance.GetAccountByUserName(userName);
 
@@ -45,14 +46,14 @@ namespace QuanLyQuanCafe
                 f.ShowDialog();
                 this.Show();
             }
-            else
+            else if (rs == 0)
             {
                 MessageBox.Show("Sai tên tài khoản hoặc mật khẩu!");
             }
+            else
+                MessageBox.Show("Tài khoản này đã bị khóa!");
             
         }
-
-        
 
         private void btnExit_Click(object sender, EventArgs e)
         {

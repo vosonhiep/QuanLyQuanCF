@@ -25,7 +25,7 @@ namespace QuanLyQuanCafe.DAO
         }
 
         private AccountDAO() { }
-        public bool Login(string userName, string passWord)
+        public int Login(string userName, string passWord)
         {
             byte[] temp = ASCIIEncoding.ASCII.GetBytes(passWord);
             byte[] hasData = new MD5CryptoServiceProvider().ComputeHash(temp);
@@ -40,7 +40,16 @@ namespace QuanLyQuanCafe.DAO
 
             string query = "USP_Login @userName , @passWord";
             DataTable result = DataProvider.Instance.ExecuteQuery(query, new object[] { userName, hasPass });
-            return result.Rows.Count > 0;
+            if (result.Rows.Count > 0)
+            {
+                Account itemp = GetAccountByUserName(userName);
+                if (itemp.IsUsed == false)
+                    return -1;
+                else
+                    return 1;
+            }
+            else
+                return 0;
         }
 
         public bool UpdateAccount(string userName, string displayName, string password, string newPassword)

@@ -16,6 +16,13 @@ namespace QuanLyQuanCafe
     {
         BindingSource foodList = new BindingSource();
         BindingSource accountList = new BindingSource();
+        BindingSource categoryList = new BindingSource();
+        BindingSource tableList = new BindingSource();
+
+        private bool isFlagFood = false;
+        private bool isFlagCategory = false;
+        private bool isAddTable = false;
+        private bool isAddAccount = false;
 
         public Account loginAccount;
         public fAdmin()
@@ -24,22 +31,29 @@ namespace QuanLyQuanCafe
             Load();
         }
 
-        #region Load
+        #region Load and Binding
 
         void Load()
         {
-            dtgvFood.DataSource = foodList;
-            dtgvAccount.DataSource = accountList;
-
             LoadDateTimePickerBill();
             LoadListBillByDate(dtpkFromDate.Value, dtpkToDate.Value);
             LoadListFood();
             LoadAccount();
             LoadCategoryIntoCombobox(cbFoodCategory);
+            LoadListCategory();
+
+
+            dtgvFood.DataSource = foodList;
+            dtgvAccount.DataSource = accountList;
+            dtgvCategory.DataSource = categoryList;
+            dtgvCategory.Columns["IsUsed"].Visible = false;             // ẩn cột IsUsed
+
 
             AddFoodBinding();
             AddAccountBinding();
+            AddCategoryBinding();
         }
+
 
         void AddAccountBinding()
         {
@@ -52,7 +66,7 @@ namespace QuanLyQuanCafe
                     //DO your Stuff here..
                 }
             }
-            
+
             nmAccountType.DataBindings.Add(new Binding("Value", dtgvAccount.DataSource, "Type", true, DataSourceUpdateMode.Never));
 
             //if (nmAccountType.Value == 0)
@@ -60,11 +74,26 @@ namespace QuanLyQuanCafe
 
         }
 
-        void LoadAccount()
+        void AddFoodBinding()
         {
-            accountList.DataSource = AccountDAO.Instance.GetListAccount();
+            txbFoodName.DataBindings.Add(new Binding("Text", dtgvFood.DataSource, "Name", true, DataSourceUpdateMode.Never));
+            txbFoodID.DataBindings.Add(new Binding("Text", dtgvFood.DataSource, "ID", true, DataSourceUpdateMode.Never));
+            nmFoodPrice.DataBindings.Add(new Binding("Value", dtgvFood.DataSource, "Price", true, DataSourceUpdateMode.Never));
+
         }
 
+        void AddCategoryBinding()
+        {
+            txbCategoryName.DataBindings.Add(new Binding("Text", dtgvCategory.DataSource, "Name", true, DataSourceUpdateMode.Never));
+            txbCategoryID.DataBindings.Add(new Binding("Text", dtgvCategory.DataSource, "ID", true, DataSourceUpdateMode.Never));
+        }
+
+        void AddTableBinding()
+        {
+            txbTableID.DataBindings.Add(new Binding("Text", dtgvTable.DataSource, "Name", true, DataSourceUpdateMode.Never));
+            txbTableName.DataBindings.Add(new Binding("Text", dtgvTable.DataSource, "ID", true, DataSourceUpdateMode.Never));
+            // binding cbTableStatus
+        }
         void LoadDateTimePickerBill()
         {
             DateTime today = DateTime.Now;
@@ -77,20 +106,24 @@ namespace QuanLyQuanCafe
             dtgvBill.DataSource = BillDAO.Instance.GetBillListByDate(checkIn, checkOut);
         }
 
+        void LoadAccount()
+        {
+            accountList.DataSource = AccountDAO.Instance.GetListAccount();
+        }
+
         void LoadListFood()
         {
             foodList.DataSource = FoodDAO.Instance.GetListFood();
         }
-        #endregion
 
-        #region Event
-
-        void AddFoodBinding()
+        void LoadListCategory()
         {
-            txbFoodName.DataBindings.Add(new Binding("Text", dtgvFood.DataSource, "Name", true, DataSourceUpdateMode.Never));
-            txbFoodID.DataBindings.Add(new Binding("Text", dtgvFood.DataSource, "ID", true, DataSourceUpdateMode.Never));
-            nmFoodPrice.DataBindings.Add(new Binding("Value", dtgvFood.DataSource, "Price", true, DataSourceUpdateMode.Never));
+            categoryList.DataSource = CategoryDAO.Instance.GetListCategory();
+        }
 
+        void LoadListTable()
+        {
+            tableList.DataSource = TableDAO.Instance.LoadTableList();
         }
 
         void LoadCategoryIntoCombobox(ComboBox cb)
@@ -98,14 +131,12 @@ namespace QuanLyQuanCafe
             cb.DataSource = CategoryDAO.Instance.GetListCategory();
             cb.DisplayMember = "Name";
         }
-
-        private void btnViewbill_Click(object sender, EventArgs e)
-        {
-            LoadListBillByDate(dtpkFromDate.Value, dtpkToDate.Value);
-        }
-
         #endregion
 
+        #region Event
+
+
+        #region Event Food
         private void btnShowFood_Click(object sender, EventArgs e)
         {
             LoadListFood();
@@ -140,52 +171,154 @@ namespace QuanLyQuanCafe
             {
                 return;
             }
-
-
         }
 
-        private void btnAddFood_Click(object sender, EventArgs e)
+        bool CheckEmpty()
         {
-            string name = txbFoodName.Text;
-            int categoryID = (cbFoodCategory.SelectedItem as Category).ID;
-            float price = (float)nmFoodPrice.Value;
-
-            if (FoodDAO.Instance.InsertFood(name, categoryID, price))
+            if (txbFoodName.Text == "")
             {
-                MessageBox.Show("Thêm món thành công");
-                LoadListFood();
-                if (insertFood != null)
-                    insertFood(this, new EventArgs());
+                MessageBox.Show("Không được để trống tên món ăn.");
+                txbFoodName.Focus();
+                return true;
+            }
+            return false;
+        }
+
+        void ControlItemFood(bool flagFood)
+        {
+            if (flagFood == false)
+            {
+                btnAddFood.Text = "Lưu";
+
+                pndtgvFood.Enabled = false;
+
+                btnEditFood.Enabled = false;
+                btnDeleteFood.Enabled = false;
+                btnShowFood.Enabled = false;
+
+                pnSearchFood.Enabled = false;
             }
             else
             {
-                MessageBox.Show("Có lỗi khi thêm");
+                btnAddFood.Text = "Thêm";
+
+                pndtgvFood.Enabled = true;
+
+                btnEditFood.Enabled = true;
+                btnDeleteFood.Enabled = true;
+                btnShowFood.Enabled = true;
+
+                pnSearchFood.Enabled = true;
+            }
+        }
+        private void btnAddFood_Click(object sender, EventArgs e)
+        {
+            int idFoodNew = 0;
+            if (isFlagFood == false)
+            {
+                FoodDAO.Instance.InsertFood("", 1, 0);          // Tạo dữ liệu mặc định
+                idFoodNew = FoodDAO.Instance.GetMaxIdFood();
+                txbFoodID.Text = idFoodNew.ToString();
+                txbFoodName.Text = "";
+                nmFoodPrice.Value = 0;
+
+                ControlItemFood(isFlagFood);
+                isFlagFood = true;
+
+            }
+            else
+            {
+                int idFood = Convert.ToInt32(txbFoodID.Text);
+                string name = txbFoodName.Text;
+                int categoryID = (cbFoodCategory.SelectedItem as Category).ID;
+                float price = (float)nmFoodPrice.Value;
+                if (!CheckEmpty())
+                {
+                    var rs = MessageBox.Show("Bạn muốn thêm món ăn?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    if (rs == DialogResult.Yes)
+                    {
+                        if (FoodDAO.Instance.UpdateFood(idFood, name, categoryID, price))
+                        {
+                            MessageBox.Show("Thêm món thành công");
+                            LoadListFood();
+                            if (insertFood != null)
+                                insertFood(this, new EventArgs());
+                            ControlItemFood(isFlagFood);
+                            isFlagFood = false;
+
+                            LoadListFood();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Có lỗi khi thêm");
+                        }
+                    }
+                    else
+                    {
+                        ControlItemFood(isFlagFood);
+                        isFlagFood = false;
+                        FoodDAO.Instance.DeleteFoodEmpty(idFood);       // xóa món ăn khỏi cơ sở dữ liệu
+                        LoadListFood();
+                    }
+                    dtgvFood.Enabled = true;
+                }
             }
         }
 
         private void btnEditFood_Click(object sender, EventArgs e)
         {
-            string name = txbFoodName.Text;
-            int categoryID = (cbFoodCategory.SelectedItem as Category).ID;
-            float price = (float)nmFoodPrice.Value;
-            int idFood = Convert.ToInt32(txbFoodID.Text);
-
-            if (FoodDAO.Instance.UpdateFood(idFood, name, categoryID, price))
+            if (isFlagFood == false)
             {
-                MessageBox.Show("Sửa món thành công");
-                LoadListFood();
-                if (updateFood != null)
-                    updateFood(this, new EventArgs());
+                btnEditFood.Text = "Lưu";
+                dtgvFood.Enabled = false;
+                isFlagFood = true;
             }
             else
             {
-                MessageBox.Show("Có lỗi khi sửa");
+                if (!CheckEmpty())
+                {
+                    var rs = MessageBox.Show("Bạn muốn thêm món ăn?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    if (rs == DialogResult.Yes)
+                    {
+                        string name = txbFoodName.Text;
+                        int categoryID = (cbFoodCategory.SelectedItem as Category).ID;
+                        float price = (float)nmFoodPrice.Value;
+                        int idFood = Convert.ToInt32(txbFoodID.Text);
+
+                        if (FoodDAO.Instance.UpdateFood(idFood, name, categoryID, price))
+                        {
+                            MessageBox.Show("Sửa món thành công");
+                            LoadListFood();
+                            if (updateFood != null)
+                                updateFood(this, new EventArgs());
+                            dtgvFood.Enabled = true;
+                            btnEditFood.Text = "Sửa";
+                        }
+                        else
+                        {
+                            MessageBox.Show("Có lỗi khi sửa");
+                        }
+                    }
+                    else
+                    {
+                        isFlagFood = false;
+                        LoadListFood();
+                        btnEditFood.Text = "Sửa";
+                        dtgvFood.Enabled = true;
+                    }
+                }
             }
+
         }
 
         private void btnDeleteFood_Click(object sender, EventArgs e)
         {
             int idFood = Convert.ToInt32(txbFoodID.Text);
+            if (IsFoodExistInTable(idFood))
+            {
+                MessageBox.Show("Món ăn đang bán cho khách không đucợ phép xóa");
+                return;
+            }
 
             if (FoodDAO.Instance.DeleteFood(idFood))
             {
@@ -198,6 +331,16 @@ namespace QuanLyQuanCafe
             {
                 MessageBox.Show("Có lỗi khi xóa");
             }
+        }
+
+        List<Food> SearchFoodByName(string name)
+        {
+            List<Food> listFood = FoodDAO.Instance.SearchFoodByName(name);
+            return listFood;
+        }
+        private void btnSearchFood_Click(object sender, EventArgs e)
+        {
+            foodList.DataSource = SearchFoodByName(txbSearchFoodName.Text);
         }
 
         private event EventHandler insertFood;
@@ -221,16 +364,228 @@ namespace QuanLyQuanCafe
             remove { updateFood -= value; }
         }
 
+        #endregion
 
-        List<Food> SearchFoodByName(string name)
+        #region Event Category
+
+        void ControlItemCategory(bool flagCategory)
         {
-            List<Food> listFood = FoodDAO.Instance.SearchFoodByName(name);
-            return listFood;
+            if (flagCategory == false)
+            {
+                btnAddCategory.Text = "Lưu";
+
+                pndtgvCategory.Enabled = false;
+
+                btnEditCategory.Enabled = false;
+                btnDeleteCategory.Enabled = false;
+                btnShowFood.Enabled = false;
+
+                //pnSearchCategory.Enabled = false;
+            }
+            else
+            {
+                btnAddCategory.Text = "Thêm";
+
+                pndtgvCategory.Enabled = true;
+
+                btnEditCategory.Enabled = true;
+                btnDeleteCategory.Enabled = true;
+                btnShowCategory.Enabled = true;
+
+                //pnSearchCategory.Enabled = true;
+            }
         }
-        private void btnSearchFood_Click(object sender, EventArgs e)
+
+        private void btnShowCategory_Click(object sender, EventArgs e)
         {
-            foodList.DataSource = SearchFoodByName(txbSearchFoodName.Text);
+            LoadListCategory();
         }
+
+        private void btnAddCategory_Click(object sender, EventArgs e)
+        {
+            int idCategoryNew = 0;
+            if (isFlagCategory == false)
+            {
+                CategoryDAO.Instance.InsertCategory("");          // Tạo dữ liệu mặc định
+                idCategoryNew = CategoryDAO.Instance.GetMaxIdCategory();
+                txbCategoryID.Text = idCategoryNew.ToString();
+                txbCategoryName.Text = "";
+
+
+                ControlItemCategory(isFlagCategory);
+                isFlagCategory = true;
+
+            }
+            else
+            {
+                if (!CheckEmptyCategory())
+                {
+                    int idCategory = Convert.ToInt32(txbCategoryID.Text);
+                    string name = txbCategoryName.Text;
+
+                    var rs = MessageBox.Show("Bạn muốn thêm món ăn?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    if (rs == DialogResult.Yes)
+                    {
+                        if (CategoryDAO.Instance.UpdateCategory(idCategory, name))
+                        {
+                            MessageBox.Show("Thêm doanh mục thành công");
+                            if (insertCategory != null)
+                                insertCategory(this, new EventArgs());
+                            ControlItemCategory(isFlagCategory);
+                            isFlagCategory = false;
+
+                            LoadListCategory();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Có lỗi khi thêm");
+                        }
+                    }
+                    else
+                    {
+                        ControlItemCategory(isFlagCategory);
+                        isFlagCategory = false;
+                        CategoryDAO.Instance.DeleteCategoryEmpty(idCategory);       // xóa doanh mục khỏi cơ sở dữ liệu
+                        LoadListCategory();
+                    }
+                    dtgvCategory.Enabled = true;
+                }
+            }
+        }
+
+        private bool CheckEmptyCategory()
+        {
+            if (string.IsNullOrEmpty(txbCategoryName.Text))
+            {
+                MessageBox.Show("Không được để trống tên doanh mục.");
+                txbCategoryName.Focus();
+                return true;
+            }
+            return false;
+        }
+
+        bool IsCategoryHaveFood(int idCategory)
+        {
+            int count = FoodDAO.Instance.GetCountFoodByCategoryID(idCategory);
+            return count > 0;
+        }
+
+        private void btnDeleteCategory_Click(object sender, EventArgs e)
+        {
+            int idCategory = Convert.ToInt32(txbCategoryID.Text);
+            if (IsCategoryHaveFood(idCategory))
+            {
+                MessageBox.Show("Doach mục đang chứa món ăn nên không được xóa");
+                return;
+            }
+            else
+            {
+                if (CategoryDAO.Instance.DeleteCategory(idCategory))
+                {
+                    MessageBox.Show("Xóa doanh mục thành công");
+                    LoadListCategory();
+                    if (deleteCategory != null)
+                        deleteCategory(this, new EventArgs());
+                }
+                else
+                {
+                    MessageBox.Show("Có lỗi khi xóa");
+                }
+            }
+        }
+
+        private void btnEditCategory_Click(object sender, EventArgs e)
+        {
+            string name = txbCategoryName.Text;
+            int idCategory = Convert.ToInt32(txbCategoryID.Text);
+
+            if (CategoryDAO.Instance.UpdateCategory(idCategory, name))
+            {
+                MessageBox.Show("Sửa doanh mục thành công");
+                LoadListCategory();
+                if (updateCategory != null)
+                    updateCategory(this, new EventArgs());
+            }
+            else
+            {
+                MessageBox.Show("Có lỗi khi sửa");
+            }
+        }
+
+        #endregion
+
+
+
+
+
+
+        private void btnViewbill_Click(object sender, EventArgs e)
+        {
+            LoadListBillByDate(dtpkFromDate.Value, dtpkToDate.Value);
+        }
+
+        #endregion
+
+
+
+
+
+
+
+        void GetFoodById(int id)
+        {
+
+        }
+
+        /// <summary>
+        /// Kiểm tra xem món ăn này có trong danh sách bàn ăn không
+        /// </summary>
+        /// <param name="idFood"></param>
+        bool IsFoodExistInTable(int idFood)
+        {
+            Food itemFood = FoodDAO.Instance.GetFoodByID(idFood);
+            List<Table> tableList = TableDAO.Instance.LoadTableList();
+
+            foreach (Table item in tableList)
+            {
+                List<QuanLyQuanCafe.DTO.Menu> listBillInfo = MenuDAO.Instance.GetListMenuByTable(item.ID);
+                foreach (QuanLyQuanCafe.DTO.Menu itemMenu in listBillInfo)
+                {
+                    if (itemFood.Name.Equals(itemMenu.FoodName))
+                        return true;
+
+                }
+            }
+            return false;
+        }
+
+
+
+
+        private event EventHandler insertCategory;
+        public event EventHandler InsertCategory
+        {
+            add { insertCategory += value; }
+            remove { insertCategory -= value; }
+        }
+
+        private event EventHandler deleteCategory;
+        public event EventHandler DeleteCategory
+        {
+            add { deleteCategory += value; }
+            remove { deleteCategory -= value; }
+        }
+
+        private event EventHandler updateCategory;
+        public event EventHandler UpdateCategory
+        {
+            add { updateCategory += value; }
+            remove { updateCategory -= value; }
+        }
+
+
+
+
 
         private void btnShowAccount_Click(object sender, EventArgs e)
         {
@@ -371,6 +726,12 @@ namespace QuanLyQuanCafe
         {
             dtgvBill.DataSource = BillDAO.Instance.GetBillListByDateAndPage(dtpkFromDate.Value, dtpkToDate.Value, Convert.ToInt32(txbPage.Text));
         }
+
+
+
+
+
+
 
     }
 }

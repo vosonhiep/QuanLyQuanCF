@@ -50,5 +50,40 @@ namespace QuanLyQuanCafe.DAO
             }
             return category;
         }
+
+        public int GetMaxIdCategory()
+        {
+            int a = (int)DataProvider.Instance.ExecuteScalar("Select MAX(id) from FoodCategory");
+            return a;
+        }
+
+        public bool InsertCategory(string name)
+        {
+            string query = string.Format("INSERT dbo.FoodCategory( name ) VALUES  ( N'{0}')", name);
+            int result = DataProvider.Instance.ExecuteNonQuery(query);
+            return result > 0;
+        }
+
+        public bool UpdateCategory(int idCategory, string name)
+        {
+            string query = string.Format("UPDATE dbo.FoodCategory SET name = N'{0}' WHERE id = {1}", name, idCategory);
+            int result = DataProvider.Instance.ExecuteNonQuery(query);
+            return result > 0;
+        }
+
+        public bool DeleteCategory(int idCategory)
+        {
+           // FoodDAO.Instance.DeleteBillInfoByFoodID(idCategory);
+
+            string query = string.Format("UPDATE dbo.Food SET IsUsed = 'false' WHERE id = " + idCategory);
+            int result = DataProvider.Instance.ExecuteNonQuery(query);
+            return result > 0;
+        }
+
+        public void DeleteCategoryEmpty(int idCategory)
+        {
+            string query = string.Format("delete dbo.Food WHERE id = " + idCategory);
+            DataProvider.Instance.ExecuteNonQuery(query);
+        }
     }
 }

@@ -38,7 +38,7 @@ namespace QuanLyQuanCafe.DAO
         public List<Food> GetListFood()
         {
             List<Food> list = new List<Food>();
-            string query = "select * from Food ";
+            string query = "select * from Food where isUsed = 'true'";
 
             DataTable data = DataProvider.Instance.ExecuteQuery(query);
 
@@ -48,6 +48,17 @@ namespace QuanLyQuanCafe.DAO
                 list.Add(food);
             }
             return list;
+        }
+
+        public int GetMaxIdFood()
+        {
+            return (int)DataProvider.Instance.ExecuteScalar("select MAX(id) from Food ");
+            
+        }
+
+        public int GetCountFoodByCategoryID(int idCategory)
+        {
+            return (int)DataProvider.Instance.ExecuteScalar("select COUNT(*) from Food where idCategory = " + idCategory);
         }
 
         public bool InsertFood(string name, int id, float price)
@@ -68,7 +79,7 @@ namespace QuanLyQuanCafe.DAO
         {
             BillInfoDAO.Instance.DeleteBillInfoByFoodID(idFood);
 
-            string query = string.Format("delete Food where id = " + idFood);
+            string query = string.Format("UPDATE dbo.Food SET IsUsed = 'false' WHERE id = " + idFood);
             int result = DataProvider.Instance.ExecuteNonQuery(query);
             return result > 0;
         }
@@ -86,6 +97,25 @@ namespace QuanLyQuanCafe.DAO
                 list.Add(food);
             }
             return list;
+        }
+
+        public Food GetFoodByID(int id)
+        {
+            string query = "select * from Food where id = " + id;
+
+            DataTable data = DataProvider.Instance.ExecuteQuery(query);
+
+            foreach (DataRow item in data.Rows)
+            {
+                return new Food(item);
+            }
+            return null;
+        }
+
+        public int DeleteFoodEmpty(int idFood)
+        {
+            string query = string.Format("Delete dbo.Food WHERE id = " + idFood);
+            return (int)DataProvider.Instance.ExecuteNonQuery(query);
         }
     }
 }
