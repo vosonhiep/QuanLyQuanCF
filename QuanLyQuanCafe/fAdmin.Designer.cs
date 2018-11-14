@@ -96,7 +96,7 @@
             this.panel19 = new System.Windows.Forms.Panel();
             this.txbTableID = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.panel20 = new System.Windows.Forms.Panel();
+            this.pndtgvTable = new System.Windows.Forms.Panel();
             this.dtgvTable = new System.Windows.Forms.DataGridView();
             this.tpAccount = new System.Windows.Forms.TabPage();
             this.panel22 = new System.Windows.Forms.Panel();
@@ -110,16 +110,19 @@
             this.panel24 = new System.Windows.Forms.Panel();
             this.btnResetPassword = new System.Windows.Forms.Button();
             this.panel26 = new System.Windows.Forms.Panel();
-            this.nmAccountType = new System.Windows.Forms.NumericUpDown();
             this.label10 = new System.Windows.Forms.Label();
             this.panel27 = new System.Windows.Forms.Panel();
             this.txbDisplayName = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
             this.panel28 = new System.Windows.Forms.Panel();
-            this.txbUsername = new System.Windows.Forms.TextBox();
+            this.txbAccountUsername = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
-            this.panel29 = new System.Windows.Forms.Panel();
+            this.pndtgvAccount = new System.Windows.Forms.Panel();
             this.dtgvAccount = new System.Windows.Forms.DataGridView();
+            this.panel5 = new System.Windows.Forms.Panel();
+            this.txbAccountID = new System.Windows.Forms.TextBox();
+            this.label13 = new System.Windows.Forms.Label();
+            this.cbAccountType = new System.Windows.Forms.ComboBox();
             this.tcAdmin.SuspendLayout();
             this.tpBill.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -149,18 +152,18 @@
             this.panel21.SuspendLayout();
             this.panel15.SuspendLayout();
             this.panel19.SuspendLayout();
-            this.panel20.SuspendLayout();
+            this.pndtgvTable.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtgvTable)).BeginInit();
             this.tpAccount.SuspendLayout();
             this.panel22.SuspendLayout();
             this.panel23.SuspendLayout();
             this.panel24.SuspendLayout();
             this.panel26.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nmAccountType)).BeginInit();
             this.panel27.SuspendLayout();
             this.panel28.SuspendLayout();
-            this.panel29.SuspendLayout();
+            this.pndtgvAccount.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtgvAccount)).BeginInit();
+            this.panel5.SuspendLayout();
             this.SuspendLayout();
             // 
             // tcAdmin
@@ -671,7 +674,7 @@
             // 
             this.tpTable.Controls.Add(this.panel11);
             this.tpTable.Controls.Add(this.panel14);
-            this.tpTable.Controls.Add(this.panel20);
+            this.tpTable.Controls.Add(this.pndtgvTable);
             this.tpTable.Location = new System.Drawing.Point(4, 22);
             this.tpTable.Name = "tpTable";
             this.tpTable.Padding = new System.Windows.Forms.Padding(3);
@@ -699,6 +702,7 @@
             this.btnShowTable.TabIndex = 3;
             this.btnShowTable.Text = "Xem";
             this.btnShowTable.UseVisualStyleBackColor = true;
+            this.btnShowTable.Click += new System.EventHandler(this.btnShowTable_Click);
             // 
             // btnEditTable
             // 
@@ -708,6 +712,7 @@
             this.btnEditTable.TabIndex = 2;
             this.btnEditTable.Text = "Sửa";
             this.btnEditTable.UseVisualStyleBackColor = true;
+            this.btnEditTable.Click += new System.EventHandler(this.btnEditTable_Click);
             // 
             // btnDeleteTable
             // 
@@ -717,6 +722,7 @@
             this.btnDeleteTable.TabIndex = 1;
             this.btnDeleteTable.Text = "Xóa";
             this.btnDeleteTable.UseVisualStyleBackColor = true;
+            this.btnDeleteTable.Click += new System.EventHandler(this.btnDeleteTable_Click);
             // 
             // btnAddTable
             // 
@@ -726,6 +732,7 @@
             this.btnAddTable.TabIndex = 0;
             this.btnAddTable.Text = "Thêm";
             this.btnAddTable.UseVisualStyleBackColor = true;
+            this.btnAddTable.Click += new System.EventHandler(this.btnAddTable_Click);
             // 
             // panel14
             // 
@@ -777,7 +784,6 @@
             // 
             this.txbTableName.Location = new System.Drawing.Point(99, 4);
             this.txbTableName.Name = "txbTableName";
-            this.txbTableName.ReadOnly = true;
             this.txbTableName.Size = new System.Drawing.Size(179, 20);
             this.txbTableName.TabIndex = 1;
             // 
@@ -818,13 +824,13 @@
             this.label5.TabIndex = 0;
             this.label5.Text = "ID:";
             // 
-            // panel20
+            // pndtgvTable
             // 
-            this.panel20.Controls.Add(this.dtgvTable);
-            this.panel20.Location = new System.Drawing.Point(7, 70);
-            this.panel20.Name = "panel20";
-            this.panel20.Size = new System.Drawing.Size(423, 382);
-            this.panel20.TabIndex = 7;
+            this.pndtgvTable.Controls.Add(this.dtgvTable);
+            this.pndtgvTable.Location = new System.Drawing.Point(7, 70);
+            this.pndtgvTable.Name = "pndtgvTable";
+            this.pndtgvTable.Size = new System.Drawing.Size(423, 382);
+            this.pndtgvTable.TabIndex = 7;
             // 
             // dtgvTable
             // 
@@ -839,7 +845,7 @@
             this.tpAccount.Controls.Add(this.panel22);
             this.tpAccount.Controls.Add(this.panel23);
             this.tpAccount.Controls.Add(this.panel24);
-            this.tpAccount.Controls.Add(this.panel29);
+            this.tpAccount.Controls.Add(this.pndtgvAccount);
             this.tpAccount.Location = new System.Drawing.Point(4, 22);
             this.tpAccount.Name = "tpAccount";
             this.tpAccount.Padding = new System.Windows.Forms.Padding(3);
@@ -926,6 +932,7 @@
             // 
             // panel24
             // 
+            this.panel24.Controls.Add(this.panel5);
             this.panel24.Controls.Add(this.btnResetPassword);
             this.panel24.Controls.Add(this.panel26);
             this.panel24.Controls.Add(this.panel27);
@@ -937,7 +944,7 @@
             // 
             // btnResetPassword
             // 
-            this.btnResetPassword.Location = new System.Drawing.Point(207, 144);
+            this.btnResetPassword.Location = new System.Drawing.Point(211, 180);
             this.btnResetPassword.Name = "btnResetPassword";
             this.btnResetPassword.Size = new System.Drawing.Size(75, 55);
             this.btnResetPassword.TabIndex = 4;
@@ -947,19 +954,12 @@
             // 
             // panel26
             // 
-            this.panel26.Controls.Add(this.nmAccountType);
+            this.panel26.Controls.Add(this.cbAccountType);
             this.panel26.Controls.Add(this.label10);
-            this.panel26.Location = new System.Drawing.Point(3, 107);
+            this.panel26.Location = new System.Drawing.Point(7, 143);
             this.panel26.Name = "panel26";
             this.panel26.Size = new System.Drawing.Size(281, 31);
             this.panel26.TabIndex = 3;
-            // 
-            // nmAccountType
-            // 
-            this.nmAccountType.Location = new System.Drawing.Point(129, 3);
-            this.nmAccountType.Name = "nmAccountType";
-            this.nmAccountType.Size = new System.Drawing.Size(51, 20);
-            this.nmAccountType.TabIndex = 1;
             // 
             // label10
             // 
@@ -975,7 +975,7 @@
             // 
             this.panel27.Controls.Add(this.txbDisplayName);
             this.panel27.Controls.Add(this.label11);
-            this.panel27.Location = new System.Drawing.Point(4, 60);
+            this.panel27.Location = new System.Drawing.Point(7, 97);
             this.panel27.Name = "panel27";
             this.panel27.Size = new System.Drawing.Size(281, 31);
             this.panel27.TabIndex = 2;
@@ -999,19 +999,19 @@
             // 
             // panel28
             // 
-            this.panel28.Controls.Add(this.txbUsername);
+            this.panel28.Controls.Add(this.txbAccountUsername);
             this.panel28.Controls.Add(this.label12);
-            this.panel28.Location = new System.Drawing.Point(4, 12);
+            this.panel28.Location = new System.Drawing.Point(7, 49);
             this.panel28.Name = "panel28";
             this.panel28.Size = new System.Drawing.Size(281, 31);
             this.panel28.TabIndex = 1;
             // 
-            // txbUsername
+            // txbAccountUsername
             // 
-            this.txbUsername.Location = new System.Drawing.Point(128, 5);
-            this.txbUsername.Name = "txbUsername";
-            this.txbUsername.Size = new System.Drawing.Size(150, 20);
-            this.txbUsername.TabIndex = 1;
+            this.txbAccountUsername.Location = new System.Drawing.Point(128, 5);
+            this.txbAccountUsername.Name = "txbAccountUsername";
+            this.txbAccountUsername.Size = new System.Drawing.Size(150, 20);
+            this.txbAccountUsername.TabIndex = 1;
             // 
             // label12
             // 
@@ -1023,13 +1023,13 @@
             this.label12.TabIndex = 0;
             this.label12.Text = "Tên tài khoản:";
             // 
-            // panel29
+            // pndtgvAccount
             // 
-            this.panel29.Controls.Add(this.dtgvAccount);
-            this.panel29.Location = new System.Drawing.Point(7, 70);
-            this.panel29.Name = "panel29";
-            this.panel29.Size = new System.Drawing.Size(423, 382);
-            this.panel29.TabIndex = 4;
+            this.pndtgvAccount.Controls.Add(this.dtgvAccount);
+            this.pndtgvAccount.Location = new System.Drawing.Point(7, 70);
+            this.pndtgvAccount.Name = "pndtgvAccount";
+            this.pndtgvAccount.Size = new System.Drawing.Size(423, 382);
+            this.pndtgvAccount.TabIndex = 4;
             // 
             // dtgvAccount
             // 
@@ -1038,6 +1038,40 @@
             this.dtgvAccount.Name = "dtgvAccount";
             this.dtgvAccount.Size = new System.Drawing.Size(417, 373);
             this.dtgvAccount.TabIndex = 0;
+            // 
+            // panel5
+            // 
+            this.panel5.Controls.Add(this.txbAccountID);
+            this.panel5.Controls.Add(this.label13);
+            this.panel5.Location = new System.Drawing.Point(7, 12);
+            this.panel5.Name = "panel5";
+            this.panel5.Size = new System.Drawing.Size(281, 31);
+            this.panel5.TabIndex = 6;
+            // 
+            // txbAccountID
+            // 
+            this.txbAccountID.Location = new System.Drawing.Point(128, 5);
+            this.txbAccountID.Name = "txbAccountID";
+            this.txbAccountID.Size = new System.Drawing.Size(150, 20);
+            this.txbAccountID.TabIndex = 1;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label13.Location = new System.Drawing.Point(4, 4);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(31, 19);
+            this.label13.TabIndex = 0;
+            this.label13.Text = "ID:";
+            // 
+            // cbAccountType
+            // 
+            this.cbAccountType.FormattingEnabled = true;
+            this.cbAccountType.Location = new System.Drawing.Point(128, 5);
+            this.cbAccountType.Name = "cbAccountType";
+            this.cbAccountType.Size = new System.Drawing.Size(151, 21);
+            this.cbAccountType.TabIndex = 2;
             // 
             // fAdmin
             // 
@@ -1087,7 +1121,7 @@
             this.panel15.PerformLayout();
             this.panel19.ResumeLayout(false);
             this.panel19.PerformLayout();
-            this.panel20.ResumeLayout(false);
+            this.pndtgvTable.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dtgvTable)).EndInit();
             this.tpAccount.ResumeLayout(false);
             this.panel22.ResumeLayout(false);
@@ -1096,13 +1130,14 @@
             this.panel24.ResumeLayout(false);
             this.panel26.ResumeLayout(false);
             this.panel26.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nmAccountType)).EndInit();
             this.panel27.ResumeLayout(false);
             this.panel27.PerformLayout();
             this.panel28.ResumeLayout(false);
             this.panel28.PerformLayout();
-            this.panel29.ResumeLayout(false);
+            this.pndtgvAccount.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dtgvAccount)).EndInit();
+            this.panel5.ResumeLayout(false);
+            this.panel5.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1171,7 +1206,7 @@
         private System.Windows.Forms.Panel panel19;
         private System.Windows.Forms.TextBox txbTableID;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Panel panel20;
+        private System.Windows.Forms.Panel pndtgvTable;
         private System.Windows.Forms.DataGridView dtgvTable;
         private System.Windows.Forms.Panel panel22;
         private System.Windows.Forms.TextBox textBox1;
@@ -1189,11 +1224,10 @@
         private System.Windows.Forms.TextBox txbDisplayName;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Panel panel28;
-        private System.Windows.Forms.TextBox txbUsername;
+        private System.Windows.Forms.TextBox txbAccountUsername;
         private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.Panel panel29;
+        private System.Windows.Forms.Panel pndtgvAccount;
         private System.Windows.Forms.DataGridView dtgvAccount;
-        private System.Windows.Forms.NumericUpDown nmAccountType;
         private System.Windows.Forms.TextBox txbPage;
         private System.Windows.Forms.Button btnPrevious;
         private System.Windows.Forms.Button btnLast;
@@ -1201,5 +1235,9 @@
         private System.Windows.Forms.Button btnFirst;
         private System.Windows.Forms.NumericUpDown nmFoodPrice;
         private System.Windows.Forms.ComboBox cbFoodCategory;
+        private System.Windows.Forms.Panel panel5;
+        private System.Windows.Forms.TextBox txbAccountID;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.ComboBox cbAccountType;
     }
 }

@@ -10,8 +10,9 @@ namespace QuanLyQuanCafe.DTO
     public class Account
     {
 
-        public Account(string userName, string displayName, int type, string password = null)
+        public Account(int id, string userName, string displayName, string type, string password = null)
         {
+            this.ID = id;
             this.UserName = userName;
             this.DisplayName = displayName;
             this.Type = type;
@@ -21,14 +22,22 @@ namespace QuanLyQuanCafe.DTO
 
         public Account(DataRow row)
         {
+            this.ID = (int)row["ID"];
             this.UserName = row["userName"].ToString();
             this.DisplayName = row["displayName"].ToString();
-            this.Type = (int)row["type"];
+            this.Type = row["type"].ToString();
             this.Password = row["password"].ToString();
             this.IsUsed = (bool)row["isUsed"];
         }
         private string userName;
 
+        private int iD;
+
+        public int ID
+        {
+            get { return iD; }
+            set { iD = value; }
+        }
         public string UserName
         {
             get { return userName; }
@@ -48,9 +57,9 @@ namespace QuanLyQuanCafe.DTO
             get { return password; }
             set { password = value; }
         }
-        private int type;
+        private string type;
 
-        public int Type
+        public string Type
         {
             get { return type; }
             set { type = value; }

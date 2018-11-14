@@ -52,9 +52,9 @@ namespace QuanLyQuanCafe.DAO
                 return 0;
         }
 
-        public bool UpdateAccount(string userName, string displayName, string password, string newPassword)
+        public bool UpdateAccount(int idAccount, string userName, string displayName, string password, string newPassword)
         {
-            int result = DataProvider.Instance.ExecuteNonQuery("exec USP_UpdateAccount @userName , @displayName , @password , @newPassword", new object[] { userName, displayName, password, newPassword });
+            int result = DataProvider.Instance.ExecuteNonQuery("exec USP_UpdateAccount @userName , @displayName , @password , @newPassword", new object[] {idAccount, userName, displayName, password, newPassword });
             return result > 0;
         }
 
@@ -72,29 +72,35 @@ namespace QuanLyQuanCafe.DAO
 
         public DataTable GetListAccount()
         {
-            return DataProvider.Instance.ExecuteQuery("Select UserName, DisplayName, Type From Account");
+            return DataProvider.Instance.ExecuteQuery("Select ID, UserName, DisplayName, Type From Account where isUsed = 'true'");
         }
 
 
-        public bool InsertAccount(string name, string displayName, int type)
+        public bool InsertAccount(string name, string displayName, string type)
         {
-            string query = string.Format("INSERT dbo.Account( UserName, DisplayName, Type, Password ) VALUES  ( N'{0}', N'{1}', {2}, {3})", name, displayName, type, "1962026656160185351301320480154111117132155");
+            string query = string.Format("INSERT dbo.Account( UserName, DisplayName, Type, Password ) VALUES  ( N'{0}', N'{1}', N'{2}', N'{3}')", name, displayName, type, "1962026656160185351301320480154111117132155");
             int result = DataProvider.Instance.ExecuteNonQuery(query);
             return result > 0;
         }
 
-        public bool UpdateAccount(string name, string displayName, int type)
+        public bool UpdateAccount(int idAccount, string username, string displayName, string type)
         {
-            string query = string.Format("UPDATE dbo.Account SET DisplayName = N'{1}', Type = {2} WHERE UserName = N'{0}'", name, displayName, type);
+            string query = string.Format("UPDATE dbo.Account SET DisplayName = N'{1}', Type = N'{2}', UserName = N'{0}' WHERE ID = {3}", username, displayName, type, idAccount);
             int result = DataProvider.Instance.ExecuteNonQuery(query);
             return result > 0;
         }
 
         public bool DeleteAccount(string userName)
         {    
-            string query = string.Format("delete Account where UserName = N'{0}'", userName);
+            string query = string.Format("Update Account set isUsed = 'false' where UserName = N'{0}'", userName);
             int result = DataProvider.Instance.ExecuteNonQuery(query);
             return result > 0;
+        }
+
+        public int DeleteAccountEmpty(int idAccount)
+        {
+            string query = string.Format("Delete dbo.Account WHERE id = " + idAccount);
+            return (int)DataProvider.Instance.ExecuteNonQuery(query);
         }
 
         public bool ResetPssword(string userName)
@@ -102,6 +108,12 @@ namespace QuanLyQuanCafe.DAO
             string query = string.Format("update Account set password = N'1962026656160185351301320480154111117132155' where UserName = N'{0}'", userName);
             int result = DataProvider.Instance.ExecuteNonQuery(query);
             return result > 0;
+        }
+
+
+        internal int GetMaxIdAccount()
+        {
+            return (int)DataProvider.Instance.ExecuteScalar("select MAX(id) from Account ");
         }
     }
 }

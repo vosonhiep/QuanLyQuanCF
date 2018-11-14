@@ -9,6 +9,22 @@ namespace QuanLyQuanCafe.DTO
 {
     public class Table
     {
+        public Table(int id, string name, string status)
+        {
+            this.ID = id;
+            this.Name = name;
+            this.Status = status;
+            this.IsUsed = true;
+        }
+
+        public Table(DataRow row)
+        {
+            this.ID = (int)row["id"];
+            this.Name = row["name"].ToString();
+            this.Status = row["status"].ToString();
+            this.IsUsed = (bool)row["isUsed"];
+        }
+
         private int iD;
 
         public int ID
@@ -31,21 +47,15 @@ namespace QuanLyQuanCafe.DTO
             set { status = value; }
         }
 
-        public Table(int id, string name, string status)
+        
+
+        private bool isUsed;
+
+        public bool IsUsed
         {
-            this.ID = id;
-            this.Name = name;
-            this.Status = status;
+            get { return isUsed; }
+            set { isUsed = value; }
         }
-
-        public Table(DataRow row)
-        {
-            this.ID = (int)row["id"];
-            this.Name = row["name"].ToString();
-            this.Status = row["status"].ToString();
-        }
-
-
 
     }
 }

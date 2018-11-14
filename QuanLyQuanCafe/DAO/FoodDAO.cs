@@ -117,5 +117,27 @@ namespace QuanLyQuanCafe.DAO
             string query = string.Format("Delete dbo.Food WHERE id = " + idFood);
             return (int)DataProvider.Instance.ExecuteNonQuery(query);
         }
+
+        /// <summary>
+        /// Kiểm tra món ăn có đã được khách gọi chưa
+        /// </summary>
+        /// <param name="idFood"></param>
+        /// <returns></returns>
+        public bool IsFoodExistInTable(int idFood)
+        {
+            Food itemFood = FoodDAO.Instance.GetFoodByID(idFood);
+            List<Table> tableList = TableDAO.Instance.LoadTableList();
+
+            foreach (Table item in tableList)
+            {
+                List<QuanLyQuanCafe.DTO.Menu> listBillInfo = MenuDAO.Instance.GetListMenuByTable(item.ID);
+                foreach (QuanLyQuanCafe.DTO.Menu itemMenu in listBillInfo)
+                {
+                    if (itemFood.Name.Equals(itemMenu.FoodName))
+                        return true;
+                }
+            }
+            return false;
+        }
     }
 }

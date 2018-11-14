@@ -36,9 +36,9 @@ namespace QuanLyQuanCafe
 
         #region Method
 
-        void ChangeAccount(int type)
+        void ChangeAccount(string type)
         {
-            adminToolStripMenuItem.Enabled = type == 1;
+            adminToolStripMenuItem.Enabled = type == "Admin";
             thToolStripMenuItem.Text += " (" + loginAccount.DisplayName + ")";
         }
 
@@ -149,6 +149,12 @@ namespace QuanLyQuanCafe
             f.InsertCategory += f_InsertCategory;
             f.UpdateCategory += f_UpdateCategory;
             f.DeleteCategory += f_DeleteCategory;
+
+            f.InsertTable += f_InsertTable;
+            f.UpdateTable += f_UpdateTable;
+            f.DeleteTable += f_DeleteTable;
+
+            
             f.ShowDialog();
         }
 
@@ -188,6 +194,22 @@ namespace QuanLyQuanCafe
             if (lsvBill.Tag != null)
                 ShowBill((lsvBill.Tag as Table).ID);
         }
+
+        void f_DeleteTable(object sender, EventArgs e)
+        {
+            LoadTable();
+        }
+
+        void f_UpdateTable(object sender, EventArgs e)
+        {
+            LoadTable();
+        }
+
+        void f_InsertTable(object sender, EventArgs e)
+        {
+            LoadTable();
+        }
+
 
         private void cbCategory_SelectedIndexChanged(object sender, EventArgs e)
         {
