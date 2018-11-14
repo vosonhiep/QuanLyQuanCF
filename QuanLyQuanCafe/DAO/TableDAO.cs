@@ -50,14 +50,14 @@ namespace QuanLyQuanCafe.DAO
 
         public bool InsertTable(string name, string status, bool isUsed)
         {
-            string query = string.Format("INSERT dbo.TableFood( name, status, isUsed ) VALUES  ( N'{0}', {1}, {2})", name, status, isUsed);
+            string query = string.Format("INSERT dbo.TableFood( name, status, isUsed ) VALUES  ( N'{0}', N'{1}', '{2}')", name, status, isUsed);
             int result = DataProvider.Instance.ExecuteNonQuery(query);
             return result > 0;
         }
 
         public bool UpdateTable(int idTable, string name, string status)
         {
-            string query = string.Format("UPDATE dbo.TableFood SET	name = N'{0}', status = {1} WHERE id = {2}", name, status, idTable);
+            string query = string.Format("UPDATE dbo.TableFood SET	name = N'{0}', status = N'{1}' WHERE id = {2}", name, status, idTable);
             int result = DataProvider.Instance.ExecuteNonQuery(query);
             return result > 0;
         }

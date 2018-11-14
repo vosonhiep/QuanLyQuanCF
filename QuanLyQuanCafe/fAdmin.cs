@@ -84,8 +84,8 @@ namespace QuanLyQuanCafe
 
         void AddTableBinding()
         {
-            txbTableID.DataBindings.Add(new Binding("Text", dtgvTable.DataSource, "Name", true, DataSourceUpdateMode.Never));
-            txbTableName.DataBindings.Add(new Binding("Text", dtgvTable.DataSource, "ID", true, DataSourceUpdateMode.Never));
+            txbTableID.DataBindings.Add(new Binding("Text", dtgvTable.DataSource, "ID", true, DataSourceUpdateMode.Never));
+            txbTableName.DataBindings.Add(new Binding("Text", dtgvTable.DataSource, "Name", true, DataSourceUpdateMode.Never));
             cbTableStatus.DataBindings.Add(new Binding("Text", dtgvTable.DataSource, "Status", true, DataSourceUpdateMode.Never));
         }
 
@@ -586,6 +586,7 @@ namespace QuanLyQuanCafe
 
         private void btnAddTable_Click(object sender, EventArgs e)
         {
+            
             int idTableNew = 0;
             if (isFlagTable == false)
             {
@@ -593,11 +594,15 @@ namespace QuanLyQuanCafe
                 idTableNew = TableDAO.Instance.GetMaxIdTable();
                 txbTableID.Text = idTableNew.ToString();
                 txbTableName.Text = "";
+                cbTableStatus.SelectedIndex = 1;
 
                 ControlItemTable(isFlagTable);
                 btnEditTable.Enabled = false;
                 btnAddTable.Text = "Lưu";
                 isFlagTable = true;
+
+                string[] strStatus = { "Có người", "Trống" };
+                cbTableStatus.DataSource = strStatus;
 
             }
             else
@@ -606,16 +611,16 @@ namespace QuanLyQuanCafe
                 {
                     int idTable = Convert.ToInt32(txbTableID.Text);
                     string name = txbTableName.Text;
-
+                    string status = cbTableStatus.SelectedValue.ToString();
                     var rs = MessageBox.Show("Bạn muốn thêm bàn?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                     if (rs == DialogResult.Yes)
                     {
-                        if (TableDAO.Instance.UpdateTable(idTable, name, "Trống"))
+                        if (TableDAO.Instance.UpdateTable(idTable, name, status))
                         {
                             MessageBox.Show("Thêm bàn thành công");
                             LoadListTable();
-                            //if (insertTable != null)
-                            //    insertTable(this, new EventArgs());
+                            if (insertTable != null)
+                                insertTable(this, new EventArgs());
                             ControlItemTable(isFlagTable);
                             btnAddTable.Text = "Thêm";
                             btnEditTable.Enabled = true;
@@ -640,6 +645,7 @@ namespace QuanLyQuanCafe
                     dtgvTable.Enabled = true;
                 }
             }
+            //AddTableBinding();
         }
 
         private bool CheckDataEmptyTable()
@@ -679,6 +685,7 @@ namespace QuanLyQuanCafe
 
         private void btnEditTable_Click(object sender, EventArgs e)
         {
+            
             if (isFlagTable == false)
             {
                 ControlItemTable(isFlagTable);
@@ -686,6 +693,9 @@ namespace QuanLyQuanCafe
                 btnEditTable.Text = "Lưu";
 
                 isFlagTable = true;
+
+                string[] strStatus = { "Có người", "Trống" };
+                cbTableStatus.DataSource = strStatus;
             }
             else
             {
@@ -695,7 +705,7 @@ namespace QuanLyQuanCafe
                     if (rs == DialogResult.Yes)
                     {
                         string name = txbTableName.Text;
-                        string status = cbTableStatus.SelectedValue.ToString();
+                        string status = cbTableStatus.SelectedItem.ToString();
 
                         int idTable = Convert.ToInt32(txbTableID.Text);
 
@@ -703,8 +713,8 @@ namespace QuanLyQuanCafe
                         {
                             MessageBox.Show("Sửa doanh mục thành công");
                             LoadListTable();
-                            //if (updateTable != null)
-                            //    updateTable(this, new EventArgs());
+                            if (updateTable != null)
+                                updateTable(this, new EventArgs());
                             ControlItemTable(isFlagTable);
                             btnAddTable.Enabled = true;
                             btnEditTable.Text = "Sửa";
@@ -895,8 +905,7 @@ namespace QuanLyQuanCafe
 
         private void btnAddAccount_Click(object sender, EventArgs e)
         {
-            string[] strType = {"Admin","Staff"};
-            cbAccountType.DataSource = strType;
+            
 
             int idAccountNew = 0;
             if (isFlagAccount == false)
@@ -912,6 +921,8 @@ namespace QuanLyQuanCafe
                 btnAddAccount.Text = "Lưu";
                 isFlagAccount = true;
 
+                string[] strType = { "Admin", "Staff" };
+                cbAccountType.DataSource = strType;
             }
             else
             {
@@ -1007,6 +1018,9 @@ namespace QuanLyQuanCafe
                 btnEditAccount.Text = "Lưu";
 
                 isFlagAccount = true;
+
+                string[] strType = { "Admin", "Staff" };
+                cbAccountType.DataSource = strType;
             }
             else
             {
