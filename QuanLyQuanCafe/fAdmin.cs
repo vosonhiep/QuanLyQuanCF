@@ -59,7 +59,7 @@ namespace QuanLyQuanCafe
             //dtgvCategory.Columns["IsUsed"].Visible = false;             // ẩn cột IsUsed
 
             AddFoodBinding();
-           // AddAccountBinding();
+            // AddAccountBinding();
             AddCategoryBinding();
             AddTableBinding();
         }
@@ -143,7 +143,28 @@ namespace QuanLyQuanCafe
         #region Event Food
         private void btnShowFood_Click(object sender, EventArgs e)
         {
-            LoadListFood();
+            if (isFlagFood == false)
+                LoadListFood();
+            else if (btnAddFood.Text.Equals("Lưu"))     // Xử lý cho trường hợp thêm
+            {
+                ControlItemFood(isFlagFood);
+                btnEditFood.Enabled = true;
+                btnAddFood.Text = "Thêm";
+                isFlagFood = false;
+                FoodDAO.Instance.DeleteFoodEmpty(Convert.ToInt32(txbFoodID.Text));       // xóa món ăn khỏi cơ sở dữ liệu
+                LoadListFood();
+
+                dtgvFood.Enabled = true;
+            }
+            else if(btnEditFood.Text.Equals("Lưu"))     // xử lý cho trường hợp sửa
+            {
+                LoadListFood();
+                ControlItemFood(isFlagFood);
+                btnAddFood.Enabled = true;
+                btnEditFood.Text = "Sửa";
+                isFlagFood = false;
+            }
+
         }
 
         private void txbFoodID_TextChanged(object sender, EventArgs e)
@@ -192,18 +213,20 @@ namespace QuanLyQuanCafe
         {
             if (flagFood == false)
             {
+                btnShowFood.Text = "Hủy";
                 txbFoodName.ReadOnly = false;
                 nmFoodPrice.ReadOnly = false;
                 pndtgvFood.Enabled = false;
 
                 //btnEditFood.Enabled = false;
                 btnDeleteFood.Enabled = false;
-                btnShowFood.Enabled = false;
+                //btnShowFood.Enabled = false;
 
                 pnSearchFood.Enabled = false;
             }
             else
             {
+                btnShowFood.Text = "Xem";
                 txbFoodName.ReadOnly = true;
                 nmFoodPrice.ReadOnly = true;
 
@@ -211,7 +234,7 @@ namespace QuanLyQuanCafe
 
                 //btnEditFood.Enabled = true;
                 btnDeleteFood.Enabled = true;
-                btnShowFood.Enabled = true;
+               // btnShowFood.Enabled = true;
 
                 pnSearchFood.Enabled = true;
             }
@@ -230,6 +253,7 @@ namespace QuanLyQuanCafe
                 ControlItemFood(isFlagFood);
                 btnEditFood.Enabled = false;
                 btnAddFood.Text = "Lưu";
+
                 isFlagFood = true;
 
             }
@@ -350,6 +374,7 @@ namespace QuanLyQuanCafe
             }
         }
 
+
         List<Food> SearchFoodByName(string name)
         {
             List<Food> listFood = FoodDAO.Instance.SearchFoodByName(name);
@@ -389,23 +414,25 @@ namespace QuanLyQuanCafe
         {
             if (flagCategory == false)
             {
+                btnShowCategory.Text = "Hủy";
+                txbCategoryName.ReadOnly = false;
                 pndtgvCategory.Enabled = false;
 
                 //btnEditCategory.Enabled = false;
                 btnDeleteCategory.Enabled = false;
-                btnShowFood.Enabled = false;
+                //btnShowFood.Enabled = false;
 
                 //pnSearchCategory.Enabled = false;
             }
             else
             {
-
-
+                btnShowCategory.Text = "Xem";
+                txbCategoryName.ReadOnly = true;
                 pndtgvCategory.Enabled = true;
 
                 //btnEditCategory.Enabled = true;
                 btnDeleteCategory.Enabled = true;
-                btnShowCategory.Enabled = true;
+                //btnShowCategory.Enabled = true;
 
                 //pnSearchCategory.Enabled = true;
             }
@@ -413,7 +440,27 @@ namespace QuanLyQuanCafe
 
         private void btnShowCategory_Click(object sender, EventArgs e)
         {
-            LoadListCategory();
+            if (isFlagCategory == false)
+                LoadListCategory();
+            else if (btnAddCategory.Text.Equals("Lưu"))     // Xử lý cho trường hợp thêm
+            {
+                ControlItemCategory(isFlagCategory);
+                btnEditCategory.Enabled = true;
+                btnAddCategory.Text = "Thêm";
+                isFlagCategory = false;
+                CategoryDAO.Instance.DeleteCategoryEmpty(Convert.ToInt32(txbCategoryID.Text));       // xóa món ăn khỏi cơ sở dữ liệu
+                LoadListCategory();
+
+                dtgvCategory.Enabled = true;
+            }
+            else if (btnEditCategory.Text.Equals("Lưu"))     // xử lý cho trường hợp sửa
+            {
+                LoadListCategory();
+                ControlItemCategory(isFlagCategory);
+                btnAddCategory.Enabled = true;
+                btnEditCategory.Text = "Sửa";
+                isFlagCategory = false;
+            }
         }
 
         private void btnAddCategory_Click(object sender, EventArgs e)
@@ -574,16 +621,19 @@ namespace QuanLyQuanCafe
         {
             if (flagTable == false)
             {
+                btnShowTable.Text = "Hủy";
+                txbTableName.ReadOnly = false;
                 pndtgvTable.Enabled = false;
-
                 //btnEditTable.Enabled = false;
                 btnDeleteTable.Enabled = false;
-                btnShowTable.Enabled = false;
+                //btnShowTable.Enabled = false;
 
                 //pnSearchCategory.Enabled = false;
             }
             else
             {
+                btnShowTable.Text = "Xem";
+                txbTableName.ReadOnly = true;
                 pndtgvTable.Enabled = true;
 
                 //btnEditCategory.Enabled = true;
@@ -596,7 +646,7 @@ namespace QuanLyQuanCafe
 
         private void btnAddTable_Click(object sender, EventArgs e)
         {
-            
+
             int idTableNew = 0;
             if (isFlagTable == false)
             {
@@ -695,7 +745,7 @@ namespace QuanLyQuanCafe
 
         private void btnEditTable_Click(object sender, EventArgs e)
         {
-            
+
             if (isFlagTable == false)
             {
                 ControlItemTable(isFlagTable);
@@ -749,7 +799,27 @@ namespace QuanLyQuanCafe
 
         private void btnShowTable_Click(object sender, EventArgs e)
         {
-            LoadListTable();
+            if (isFlagTable == false)
+                LoadListTable();
+            else if (btnAddTable.Text.Equals("Lưu"))     // Xử lý cho trường hợp thêm
+            {
+                ControlItemTable(isFlagTable);
+                btnEditTable.Enabled = true;
+                btnAddTable.Text = "Thêm";
+                isFlagTable = false;
+                TableDAO.Instance.DeleteTableEmpty(Convert.ToInt32(txbTableID.Text));       // xóa món ăn khỏi cơ sở dữ liệu
+                LoadListTable();
+
+                dtgvTable.Enabled = true;
+            }
+            else if (btnEditTable.Text.Equals("Lưu"))     // xử lý cho trường hợp sửa
+            {
+                LoadListTable();
+                ControlItemTable(isFlagTable);
+                btnAddTable.Enabled = true;
+                btnEditTable.Text = "Sửa";
+                isFlagTable = false;
+            }
         }
 
         private event EventHandler insertTable;
@@ -1024,15 +1094,15 @@ namespace QuanLyQuanCafe
                 if (icust.Validate() == false)
                     return;
                 Fac.Save(icust);
-                
+
             }
             dtgvAccount.DataSource = Fac.GetAccounts();
         }
 
         private bool CheckDataEmptyAccount()
         {
-            if(string.IsNullOrEmpty(txbAccountUsername.Text) || 
-                string.IsNullOrEmpty(txbDisplayName.Text))             
+            if (string.IsNullOrEmpty(txbAccountUsername.Text) ||
+                string.IsNullOrEmpty(txbDisplayName.Text))
             {
                 MessageBox.Show("Bạn không được bỏ trống trường dữ liệu");
                 return true;
@@ -1044,6 +1114,13 @@ namespace QuanLyQuanCafe
         {
             if (flagAccount == false)
             {
+                txbAccountUsername.ReadOnly = false;
+                txbDisplayName.ReadOnly = false;
+                txbPhone.ReadOnly = false;
+                txbAddress.ReadOnly = false;
+                txbCMND.ReadOnly = false;
+                txbEmail.ReadOnly = false;
+
                 pndtgvAccount.Enabled = false;
 
                 //btnEditAccount.Enabled = false;
@@ -1054,6 +1131,13 @@ namespace QuanLyQuanCafe
             }
             else
             {
+                txbAccountUsername.ReadOnly = true;
+                txbDisplayName.ReadOnly = true;
+                txbPhone.ReadOnly = true;
+                txbAddress.ReadOnly = true;
+                txbCMND.ReadOnly = true;
+                txbEmail.ReadOnly = true;
+
                 pndtgvAccount.Enabled = true;
 
                 //btnEditCategory.Enabled = true;
@@ -1175,6 +1259,16 @@ namespace QuanLyQuanCafe
         {
 
         }
+
+        private void btnAccountCancel_Click(object sender, EventArgs e)
+        {
+            //isFlagAccount = false;
+            //ControlItemAccount(isFlagAccount);
+            //btnAddAccount.Text = "Thêm";
+            //btnEditAccount.Text = "Sửa";
+            //btnAccountCancel.Visible = false;
+        }
+
 
 
 

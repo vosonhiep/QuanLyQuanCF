@@ -82,7 +82,7 @@ namespace QuanLyQuanCafe.DAO
 
         public void DeleteCategoryEmpty(int idCategory)
         {
-            string query = string.Format("delete dbo.Food WHERE id = " + idCategory);
+            string query = string.Format("delete dbo.FoodCategory WHERE id = " + idCategory);
             DataProvider.Instance.ExecuteNonQuery(query);
         }
     }

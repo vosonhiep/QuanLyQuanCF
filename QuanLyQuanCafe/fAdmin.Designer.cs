@@ -138,6 +138,7 @@
             this.label12 = new System.Windows.Forms.Label();
             this.pndtgvAccount = new System.Windows.Forms.Panel();
             this.dtgvAccount = new System.Windows.Forms.DataGridView();
+            this.btnAccountCancel = new System.Windows.Forms.Button();
             this.tcAdmin.SuspendLayout();
             this.tpBill.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -638,6 +639,7 @@
             // 
             this.txbCategoryName.Location = new System.Drawing.Point(144, 4);
             this.txbCategoryName.Name = "txbCategoryName";
+            this.txbCategoryName.ReadOnly = true;
             this.txbCategoryName.Size = new System.Drawing.Size(134, 20);
             this.txbCategoryName.TabIndex = 1;
             // 
@@ -809,6 +811,7 @@
             // 
             this.txbTableName.Location = new System.Drawing.Point(99, 4);
             this.txbTableName.Name = "txbTableName";
+            this.txbTableName.ReadOnly = true;
             this.txbTableName.Size = new System.Drawing.Size(179, 20);
             this.txbTableName.TabIndex = 1;
             // 
@@ -907,6 +910,7 @@
             // 
             // panel23
             // 
+            this.panel23.Controls.Add(this.btnAccountCancel);
             this.panel23.Controls.Add(this.btnShowAccount);
             this.panel23.Controls.Add(this.btnEditAccount);
             this.panel23.Controls.Add(this.btnDeleteAccount);
@@ -986,6 +990,7 @@
             // 
             this.txbEmail.Location = new System.Drawing.Point(128, 4);
             this.txbEmail.Name = "txbEmail";
+            this.txbEmail.ReadOnly = true;
             this.txbEmail.Size = new System.Drawing.Size(150, 20);
             this.txbEmail.TabIndex = 1;
             // 
@@ -1012,6 +1017,7 @@
             // 
             this.txbCMND.Location = new System.Drawing.Point(128, 4);
             this.txbCMND.Name = "txbCMND";
+            this.txbCMND.ReadOnly = true;
             this.txbCMND.Size = new System.Drawing.Size(150, 20);
             this.txbCMND.TabIndex = 1;
             // 
@@ -1038,6 +1044,7 @@
             // 
             this.txbAddress.Location = new System.Drawing.Point(128, 4);
             this.txbAddress.Name = "txbAddress";
+            this.txbAddress.ReadOnly = true;
             this.txbAddress.Size = new System.Drawing.Size(150, 20);
             this.txbAddress.TabIndex = 1;
             // 
@@ -1094,6 +1101,7 @@
             // 
             this.txbPhone.Location = new System.Drawing.Point(128, 4);
             this.txbPhone.Name = "txbPhone";
+            this.txbPhone.ReadOnly = true;
             this.txbPhone.Size = new System.Drawing.Size(150, 20);
             this.txbPhone.TabIndex = 1;
             // 
@@ -1188,6 +1196,7 @@
             // 
             this.txbDisplayName.Location = new System.Drawing.Point(128, 4);
             this.txbDisplayName.Name = "txbDisplayName";
+            this.txbDisplayName.ReadOnly = true;
             this.txbDisplayName.Size = new System.Drawing.Size(150, 20);
             this.txbDisplayName.TabIndex = 1;
             // 
@@ -1214,6 +1223,7 @@
             // 
             this.txbAccountUsername.Location = new System.Drawing.Point(128, 5);
             this.txbAccountUsername.Name = "txbAccountUsername";
+            this.txbAccountUsername.ReadOnly = true;
             this.txbAccountUsername.Size = new System.Drawing.Size(150, 20);
             this.txbAccountUsername.TabIndex = 1;
             // 
@@ -1243,6 +1253,17 @@
             this.dtgvAccount.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dtgvAccount.Size = new System.Drawing.Size(417, 373);
             this.dtgvAccount.TabIndex = 0;
+            // 
+            // btnAccountCancel
+            // 
+            this.btnAccountCancel.Location = new System.Drawing.Point(81, 3);
+            this.btnAccountCancel.Name = "btnAccountCancel";
+            this.btnAccountCancel.Size = new System.Drawing.Size(75, 55);
+            this.btnAccountCancel.TabIndex = 4;
+            this.btnAccountCancel.Text = "Xem";
+            this.btnAccountCancel.UseVisualStyleBackColor = true;
+            this.btnAccountCancel.Visible = false;
+            this.btnAccountCancel.Click += new System.EventHandler(this.btnAccountCancel_Click);
             // 
             // fAdmin
             // 
@@ -1435,5 +1456,6 @@
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.TextBox txbPhone;
         private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Button btnAccountCancel;
     }
 }
