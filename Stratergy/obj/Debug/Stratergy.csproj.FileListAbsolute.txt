@@ -1,0 +1,5 @@
+C:\Users\VOSONHIEP\Desktop\New folder\QuanLyQuanCF\Stratergy\bin\Debug\Stratergy.dll
+C:\Users\VOSONHIEP\Desktop\New folder\QuanLyQuanCF\Stratergy\bin\Debug\Stratergy.pdb
+C:\Users\VOSONHIEP\Desktop\New folder\QuanLyQuanCF\Stratergy\obj\Debug\Stratergy.dll
+C:\Users\VOSONHIEP\Desktop\New folder\QuanLyQuanCF\Stratergy\obj\Debug\Stratergy.pdb
+C:\Users\VOSONHIEP\Desktop\New folder\QuanLyQuanCF\Stratergy\obj\Debug\Stratergy.csprojResolveAssemblyReference.cache

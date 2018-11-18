@@ -13,7 +13,7 @@ namespace QuanLyQuanCafe.DAO
     {
         private static AccountDAO instance;
 
-        public static AccountDAO Instance
+        public static AccountDAO getInstance
         {
             get
             {

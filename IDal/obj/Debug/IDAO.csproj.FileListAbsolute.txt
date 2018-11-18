@@ -1,0 +1,5 @@
+C:\Users\VOSONHIEP\Desktop\New folder\QuanLyQuanCF\IDal\bin\Debug\IDal.dll
+C:\Users\VOSONHIEP\Desktop\New folder\QuanLyQuanCF\IDal\bin\Debug\IDal.pdb
+C:\Users\VOSONHIEP\Desktop\New folder\QuanLyQuanCF\IDal\obj\Debug\IDal.dll
+C:\Users\VOSONHIEP\Desktop\New folder\QuanLyQuanCF\IDal\obj\Debug\IDal.pdb
+C:\Users\VOSONHIEP\Desktop\New folder\QuanLyQuanCF\IDal\obj\Debug\IDAO.csprojResolveAssemblyReference.cache

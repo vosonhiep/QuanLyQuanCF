@@ -1,4 +1,7 @@
-﻿using QuanLyQuanCafe.DAO;
+﻿using Facade;
+using FactoryAccount;
+using IAccountInterface;
+using QuanLyQuanCafe.DAO;
 using QuanLyQuanCafe.DTO;
 using System;
 using System.Collections.Generic;
@@ -14,6 +17,10 @@ namespace QuanLyQuanCafe
 {
     public partial class fAdmin : Form
     {
+
+        AccountUiFacade Fac = new AccountUiFacade("AdoAccDAO");
+        IAccount icust = null;
+
         BindingSource foodList = new BindingSource();
         BindingSource accountList = new BindingSource();
         BindingSource categoryList = new BindingSource();
@@ -49,10 +56,10 @@ namespace QuanLyQuanCafe
             dtgvCategory.DataSource = categoryList;
             dtgvTable.DataSource = tableList;
 
-            dtgvCategory.Columns["IsUsed"].Visible = false;             // ẩn cột IsUsed
+            //dtgvCategory.Columns["IsUsed"].Visible = false;             // ẩn cột IsUsed
 
             AddFoodBinding();
-            AddAccountBinding();
+           // AddAccountBinding();
             AddCategoryBinding();
             AddTableBinding();
         }
@@ -103,7 +110,9 @@ namespace QuanLyQuanCafe
 
         void LoadListAccount()
         {
-            accountList.DataSource = AccountDAO.Instance.GetListAccount();
+            //accountList.DataSource = AccountDAO.getInstance.GetListAccount();
+            Fac = new AccountUiFacade("AdoAccDAO");
+            dtgvAccount.DataSource = Fac.GetAccounts();
         }
 
         void LoadListFood()
@@ -183,8 +192,8 @@ namespace QuanLyQuanCafe
         {
             if (flagFood == false)
             {
-
-
+                txbFoodName.ReadOnly = false;
+                nmFoodPrice.ReadOnly = false;
                 pndtgvFood.Enabled = false;
 
                 //btnEditFood.Enabled = false;
@@ -195,7 +204,8 @@ namespace QuanLyQuanCafe
             }
             else
             {
-
+                txbFoodName.ReadOnly = true;
+                nmFoodPrice.ReadOnly = true;
 
                 pndtgvFood.Enabled = true;
 
@@ -885,7 +895,7 @@ namespace QuanLyQuanCafe
                 MessageBox.Show("Không được xóa tài khoản đang sử dụng");
                 return;
             }
-            if (AccountDAO.Instance.DeleteAccount(userName))
+            if (AccountDAO.getInstance.DeleteAccount(userName))
             {
                 MessageBox.Show("Xóa tài khoản thành công");
             }
@@ -900,71 +910,123 @@ namespace QuanLyQuanCafe
 
         void ResetPassword(string userName)
         {
-            AccountDAO.Instance.ResetPssword(userName);
+            AccountDAO.getInstance.ResetPssword(userName);
+        }
+
+        //private void btnAddAccount_Click(object sender, EventArgs e)
+        //{
+        //    int idAccountNew = 0;
+        //    if (isFlagAccount == false)
+        //    {
+        //        AccountDAO.getInstance.InsertAccount("", "", "");          // Tạo dữ liệu mặc định
+        //        idAccountNew = AccountDAO.getInstance.GetMaxIdAccount();
+        //        txbAccountID.Text = idAccountNew.ToString();
+        //        txbAccountUsername.Text = "";
+        //        txbDisplayName.Text = "";
+
+        //        ControlItemAccount(isFlagAccount);
+        //        btnEditAccount.Enabled = false;
+        //        btnAddAccount.Text = "Lưu";
+        //        isFlagAccount = true;
+
+        //        string[] strType = { "Admin", "Staff" };
+        //        cbAccountType.DataSource = strType;
+        //    }
+        //    else
+        //    {
+        //        if (!CheckDataEmptyAccount())
+        //        {
+        //            int idAccount = Convert.ToInt32(txbAccountID.Text);
+        //            string username = txbAccountUsername.Text;
+        //            string displayname = txbDisplayName.Text;
+        //            string type = cbAccountType.SelectedValue.ToString();
+        //            var rs = MessageBox.Show("Bạn muốn thêm tài khoản?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+        //            if (rs == DialogResult.Yes)
+        //            {
+        //                if (AccountDAO.getInstance.UpdateAccount(idAccount, username, displayname, type))
+        //                {
+        //                    MessageBox.Show("Thêm bàn thành công");
+        //                    LoadListAccount();
+        //                    if (insertAccount != null)
+        //                        insertAccount(this, new EventArgs());
+        //                    ControlItemAccount(isFlagAccount);
+        //                    btnAddAccount.Text = "Thêm";
+        //                    btnEditAccount.Enabled = true;
+        //                    isFlagAccount = false;
+
+        //                    LoadListAccount();
+        //                }
+        //                else
+        //                {
+        //                    MessageBox.Show("Có lỗi khi thêm");
+        //                }
+        //            }
+        //            else
+        //            {
+        //                ControlItemAccount(isFlagAccount);
+        //                btnAddAccount.Text = "Thêm";
+        //                btnEditAccount.Enabled = true;
+        //                isFlagAccount = false;
+        //                AccountDAO.getInstance.DeleteAccountEmpty(idAccount);       // xóa bàn khỏi cơ sở dữ liệu
+        //                LoadListAccount();
+        //            }
+        //            dtgvAccount.Enabled = true;
+        //        }
+        //    }
+        //}
+
+        void Clear()
+        {
+            txbAccountUsername.Text = "";
+            txbDisplayName.Text = "";
+            cbAccountType.SelectedIndex = 1;
+            txbPhone.Text = "";
+            cbGioiTinh.SelectedIndex = 1;
+            txbAddress.Text = "";
+            txbCMND.Text = "";
+            txbEmail.Text = "";
+        }
+
+        void GetDataFromUI(IAccount icust)
+        {
+            icust.UserName = txbAccountUsername.Text;
+            icust.DisplayName = txbDisplayName.Text;
+            icust.DisplayName = "1";
+            icust.IsUsed = true;
+            icust.Phone = txbPhone.Text;
+            if (cbGioiTinh.SelectedIndex == 1)
+                icust.GioiTinh = true;
+            else
+                icust.GioiTinh = false;
+            icust.Address = txbAddress.Text;
+            icust.CMND = txbCMND.Text;
+            icust.ImageID = "";
+            icust.Birthday = DateTime.Now;
+            icust.Email = txbEmail.Text;
         }
 
         private void btnAddAccount_Click(object sender, EventArgs e)
         {
-            
-
-            int idAccountNew = 0;
             if (isFlagAccount == false)
             {
-                AccountDAO.Instance.InsertAccount("","","");          // Tạo dữ liệu mặc định
-                idAccountNew = AccountDAO.Instance.GetMaxIdAccount();
-                txbAccountID.Text = idAccountNew.ToString();
-                txbAccountUsername.Text = "";
-                txbDisplayName.Text = "";
-
+                //icust = Factory<IAccount>.Create(cbAccountType.Text);
+                Clear();
                 ControlItemAccount(isFlagAccount);
                 btnEditAccount.Enabled = false;
                 btnAddAccount.Text = "Lưu";
                 isFlagAccount = true;
-
-                string[] strType = { "Admin", "Staff" };
-                cbAccountType.DataSource = strType;
             }
             else
             {
-                if (!CheckDataEmptyAccount())
-                {
-                    int idAccount = Convert.ToInt32(txbAccountID.Text);
-                    string username = txbAccountUsername.Text;
-                    string displayname = txbDisplayName.Text;
-                    string type = cbAccountType.SelectedValue.ToString();
-                    var rs = MessageBox.Show("Bạn muốn thêm tài khoản?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                    if (rs == DialogResult.Yes)
-                    {
-                        if (AccountDAO.Instance.UpdateAccount(idAccount, username, displayname,type))
-                        {
-                            MessageBox.Show("Thêm bàn thành công");
-                            LoadListAccount();
-                            //if (insertAccount != null)
-                            //    insertAccount(this, new EventArgs());
-                            ControlItemAccount(isFlagAccount);
-                            btnAddAccount.Text = "Thêm";
-                            btnEditAccount.Enabled = true;
-                            isFlagAccount = false;
-
-                            LoadListAccount();
-                        }
-                        else
-                        {
-                            MessageBox.Show("Có lỗi khi thêm");
-                        }
-                    }
-                    else
-                    {
-                        ControlItemAccount(isFlagAccount);
-                        btnAddAccount.Text = "Thêm";
-                        btnEditAccount.Enabled = true;
-                        isFlagAccount = false;
-                        AccountDAO.Instance.DeleteAccountEmpty(idAccount);       // xóa bàn khỏi cơ sở dữ liệu
-                        LoadListAccount();
-                    }
-                    dtgvAccount.Enabled = true;
-                }
+                icust = Factory<IAccount>.Create(cbAccountType.Text);
+                icust = Fac.Get(cbAccountType.Text);
+                GetDataFromUI(icust);
+                if (icust.Validate() == false)
+                    return;
+                Fac.Save(icust);
+                
             }
+            dtgvAccount.DataSource = Fac.GetAccounts();
         }
 
         private bool CheckDataEmptyAccount()
@@ -1034,7 +1096,7 @@ namespace QuanLyQuanCafe
                         string displayName = txbDisplayName.Text;
                         int idAccount = Convert.ToInt32(txbAccountID.Text);
 
-                        if (AccountDAO.Instance.UpdateAccount(idAccount, username, displayName, type))
+                        if (AccountDAO.getInstance.UpdateAccount(idAccount, username, displayName, type))
                         {
                             MessageBox.Show("Sửa tài khoản thành công");
                             LoadListAccount();
@@ -1107,6 +1169,11 @@ namespace QuanLyQuanCafe
         private void txbPage_TextChanged(object sender, EventArgs e)
         {
             dtgvBill.DataSource = BillDAO.Instance.GetBillListByDateAndPage(dtpkFromDate.Value, dtpkToDate.Value, Convert.ToInt32(txbPage.Text));
+        }
+
+        private void dtpkToDate_ValueChanged(object sender, EventArgs e)
+        {
+
         }
 
 

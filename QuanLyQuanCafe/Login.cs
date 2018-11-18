@@ -29,7 +29,7 @@ namespace QuanLyQuanCafe
 
         public int Login(string userName, string passWord)
         {
-            return AccountDAO.Instance.Login(userName, passWord);
+            return AccountDAO.getInstance.Login(userName, passWord);
         }
 
         private void btnLogin_Click(object sender, EventArgs e)
@@ -39,7 +39,7 @@ namespace QuanLyQuanCafe
             int rs = Login(userName, passWord);
             if (rs == 1)
             {
-                Account loginAccount = AccountDAO.Instance.GetAccountByUserName(userName);
+                Account loginAccount = AccountDAO.getInstance.GetAccountByUserName(userName);
 
                 fTableManager f = new fTableManager(loginAccount);
                 this.Hide();

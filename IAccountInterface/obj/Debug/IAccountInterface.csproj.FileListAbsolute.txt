@@ -1,0 +1,12 @@
+C:\Users\VOSONHIEP\Desktop\New folder\QuanLyQuanCF\IAccountInterface\bin\Debug\IAccountInterface.dll.config
+C:\Users\VOSONHIEP\Desktop\New folder\QuanLyQuanCF\IAccountInterface\bin\Debug\IAccountInterface.dll
+C:\Users\VOSONHIEP\Desktop\New folder\QuanLyQuanCF\IAccountInterface\bin\Debug\IAccountInterface.pdb
+C:\Users\VOSONHIEP\Desktop\New folder\QuanLyQuanCF\IAccountInterface\bin\Debug\EntityFramework.dll
+C:\Users\VOSONHIEP\Desktop\New folder\QuanLyQuanCF\IAccountInterface\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\VOSONHIEP\Desktop\New folder\QuanLyQuanCF\IAccountInterface\bin\Debug\Stratergy.dll
+C:\Users\VOSONHIEP\Desktop\New folder\QuanLyQuanCF\IAccountInterface\bin\Debug\Stratergy.pdb
+C:\Users\VOSONHIEP\Desktop\New folder\QuanLyQuanCF\IAccountInterface\bin\Debug\EntityFramework.xml
+C:\Users\VOSONHIEP\Desktop\New folder\QuanLyQuanCF\IAccountInterface\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\VOSONHIEP\Desktop\New folder\QuanLyQuanCF\IAccountInterface\obj\Debug\IAccountInterface.csprojResolveAssemblyReference.cache
+C:\Users\VOSONHIEP\Desktop\New folder\QuanLyQuanCF\IAccountInterface\obj\Debug\IAccountInterface.dll
+C:\Users\VOSONHIEP\Desktop\New folder\QuanLyQuanCF\IAccountInterface\obj\Debug\IAccountInterface.pdb

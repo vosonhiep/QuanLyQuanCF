@@ -45,12 +45,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="fAddFood.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="fAddFood.Designer.cs">
-      <DependentUpon>fAddFood.cs</DependentUpon>
-    </Compile>
     <Compile Include="DAO\AccountDAO.cs" />
     <Compile Include="DAO\BillDAO.cs" />
     <Compile Include="DAO\BillInfoDAO.cs" />
@@ -92,9 +86,6 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="fAddFood.resx">
-      <DependentUpon>fAddFood.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="fAccountProfile.resx">
       <DependentUpon>fAccountProfile.cs</DependentUpon>
     </EmbeddedResource>
@@ -129,6 +120,34 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="AccountDesignPattern\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AbstractDAO\AbstractDAO.csproj">
+      <Project>{b0f465cf-a81f-42f7-adc3-a2979fb90935}</Project>
+      <Name>AbstractDAO</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Facade\Facade.csproj">
+      <Project>{ba1db2d4-c1f6-45d1-8597-efaf750e5c5c}</Project>
+      <Name>Facade</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FactoryAccount\FactoryAccount.csproj">
+      <Project>{1b7245de-df2e-4109-bb6a-7731269e16e7}</Project>
+      <Name>FactoryAccount</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FactoryDAO\FactoryDAO.csproj">
+      <Project>{04cf3351-3f46-4a78-82a8-c6e5fe1ee2c4}</Project>
+      <Name>FactoryDAO</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\IAccountInterface\IAccountInterface.csproj">
+      <Project>{4a1ec359-8e55-432a-abdd-73f2889eefc3}</Project>
+      <Name>IAccountInterface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\IDal\IDAO.csproj">
+      <Project>{d6abcb08-b9f3-4754-8586-01dd704d4ab5}</Project>
+      <Name>IDAO</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

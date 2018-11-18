@@ -1,0 +1,9 @@
+C:\Users\VOSONHIEP\Desktop\New folder\QuanLyQuanCF\ValidationStratergy\bin\Debug\ValidationStratergy.dll
+C:\Users\VOSONHIEP\Desktop\New folder\QuanLyQuanCF\ValidationStratergy\bin\Debug\ValidationStratergy.pdb
+C:\Users\VOSONHIEP\Desktop\New folder\QuanLyQuanCF\ValidationStratergy\bin\Debug\IAccountInterface.dll
+C:\Users\VOSONHIEP\Desktop\New folder\QuanLyQuanCF\ValidationStratergy\bin\Debug\Stratergy.dll
+C:\Users\VOSONHIEP\Desktop\New folder\QuanLyQuanCF\ValidationStratergy\bin\Debug\IAccountInterface.pdb
+C:\Users\VOSONHIEP\Desktop\New folder\QuanLyQuanCF\ValidationStratergy\bin\Debug\Stratergy.pdb
+C:\Users\VOSONHIEP\Desktop\New folder\QuanLyQuanCF\ValidationStratergy\obj\Debug\ValidationStratergy.csprojResolveAssemblyReference.cache
+C:\Users\VOSONHIEP\Desktop\New folder\QuanLyQuanCF\ValidationStratergy\obj\Debug\ValidationStratergy.dll
+C:\Users\VOSONHIEP\Desktop\New folder\QuanLyQuanCF\ValidationStratergy\obj\Debug\ValidationStratergy.pdb

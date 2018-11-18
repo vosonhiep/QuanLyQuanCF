@@ -53,12 +53,12 @@ namespace QuanLyQuanCafe
             }
             else
             {
-                Account item = AccountDAO.Instance.GetAccountByUserName(userName);
-                if (AccountDAO.Instance.UpdateAccount(item.ID, userName, displayName, password, newpass))
+                Account item = AccountDAO.getInstance.GetAccountByUserName(userName);
+                if (AccountDAO.getInstance.UpdateAccount(item.ID, userName, displayName, password, newpass))
                 {
                     MessageBox.Show("Cập nhật thành công");
                     if (updateAccount != null)
-                        updateAccount(this, new AccountEvent(AccountDAO.Instance.GetAccountByUserName(userName)));
+                        updateAccount(this, new AccountEvent(AccountDAO.getInstance.GetAccountByUserName(userName)));
                 }
                 else
                     MessageBox.Show("Đã có sai xót");

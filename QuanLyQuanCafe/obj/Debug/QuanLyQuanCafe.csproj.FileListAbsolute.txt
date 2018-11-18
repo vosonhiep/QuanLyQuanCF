@@ -36,3 +36,39 @@ E:\Data_Object_Source\QuanLyQuanCafe\QuanLyQuanCF\QuanLyQuanCafe\obj\Debug\QuanL
 E:\Data_Object_Source\QuanLyQuanCafe\QuanLyQuanCF\QuanLyQuanCafe\bin\Debug\QuanLyQuanCafe.pdb
 E:\Data_Object_Source\QuanLyQuanCafe\QuanLyQuanCF\QuanLyQuanCafe\obj\Debug\QuanLyQuanCafe.csprojResolveAssemblyReference.cache
 E:\Data_Object_Source\QuanLyQuanCafe\QuanLyQuanCF\QuanLyQuanCafe\obj\Debug\QuanLyQuanCafe.fAddFood.resources
+C:\Users\VOSONHIEP\Desktop\New folder\QuanLyQuanCF\QuanLyQuanCafe\bin\Debug\QuanLyQuanCafe.exe.config
+C:\Users\VOSONHIEP\Desktop\New folder\QuanLyQuanCF\QuanLyQuanCafe\bin\Debug\QuanLyQuanCafe.exe
+C:\Users\VOSONHIEP\Desktop\New folder\QuanLyQuanCF\QuanLyQuanCafe\bin\Debug\QuanLyQuanCafe.pdb
+C:\Users\VOSONHIEP\Desktop\New folder\QuanLyQuanCF\QuanLyQuanCafe\obj\Debug\QuanLyQuanCafe.csprojResolveAssemblyReference.cache
+C:\Users\VOSONHIEP\Desktop\New folder\QuanLyQuanCF\QuanLyQuanCafe\obj\Debug\QuanLyQuanCafe.fAccountProfile.resources
+C:\Users\VOSONHIEP\Desktop\New folder\QuanLyQuanCF\QuanLyQuanCafe\obj\Debug\QuanLyQuanCafe.fAdmin.resources
+C:\Users\VOSONHIEP\Desktop\New folder\QuanLyQuanCF\QuanLyQuanCafe\obj\Debug\QuanLyQuanCafe.fTableManager.resources
+C:\Users\VOSONHIEP\Desktop\New folder\QuanLyQuanCF\QuanLyQuanCafe\obj\Debug\QuanLyQuanCafe.fLogin.resources
+C:\Users\VOSONHIEP\Desktop\New folder\QuanLyQuanCF\QuanLyQuanCafe\obj\Debug\QuanLyQuanCafe.Properties.Resources.resources
+C:\Users\VOSONHIEP\Desktop\New folder\QuanLyQuanCF\QuanLyQuanCafe\obj\Debug\QuanLyQuanCafe.csproj.GenerateResource.Cache
+C:\Users\VOSONHIEP\Desktop\New folder\QuanLyQuanCF\QuanLyQuanCafe\obj\Debug\QuanLyQuanCafe.exe
+C:\Users\VOSONHIEP\Desktop\New folder\QuanLyQuanCF\QuanLyQuanCafe\obj\Debug\QuanLyQuanCafe.pdb
+C:\Users\VOSONHIEP\Desktop\New folder\QuanLyQuanCF\QuanLyQuanCafe\bin\Debug\AbstractDAO.dll
+C:\Users\VOSONHIEP\Desktop\New folder\QuanLyQuanCF\QuanLyQuanCafe\bin\Debug\Facade.dll
+C:\Users\VOSONHIEP\Desktop\New folder\QuanLyQuanCF\QuanLyQuanCafe\bin\Debug\FactoryAccount.dll
+C:\Users\VOSONHIEP\Desktop\New folder\QuanLyQuanCF\QuanLyQuanCafe\bin\Debug\FactoryDAO.dll
+C:\Users\VOSONHIEP\Desktop\New folder\QuanLyQuanCF\QuanLyQuanCafe\bin\Debug\IAccountInterface.dll
+C:\Users\VOSONHIEP\Desktop\New folder\QuanLyQuanCF\QuanLyQuanCafe\bin\Debug\IDal.dll
+C:\Users\VOSONHIEP\Desktop\New folder\QuanLyQuanCF\QuanLyQuanCafe\bin\Debug\Unity.Abstractions.dll
+C:\Users\VOSONHIEP\Desktop\New folder\QuanLyQuanCF\QuanLyQuanCafe\bin\Debug\Unity.Container.dll
+C:\Users\VOSONHIEP\Desktop\New folder\QuanLyQuanCF\QuanLyQuanCafe\bin\Debug\ValidationStratergy.dll
+C:\Users\VOSONHIEP\Desktop\New folder\QuanLyQuanCF\QuanLyQuanCafe\bin\Debug\AccountLibrary.dll
+C:\Users\VOSONHIEP\Desktop\New folder\QuanLyQuanCF\QuanLyQuanCafe\bin\Debug\AdoDAO.dll
+C:\Users\VOSONHIEP\Desktop\New folder\QuanLyQuanCF\QuanLyQuanCafe\bin\Debug\Stratergy.dll
+C:\Users\VOSONHIEP\Desktop\New folder\QuanLyQuanCF\QuanLyQuanCafe\bin\Debug\AbstractDAO.pdb
+C:\Users\VOSONHIEP\Desktop\New folder\QuanLyQuanCF\QuanLyQuanCafe\bin\Debug\Facade.pdb
+C:\Users\VOSONHIEP\Desktop\New folder\QuanLyQuanCF\QuanLyQuanCafe\bin\Debug\FactoryAccount.pdb
+C:\Users\VOSONHIEP\Desktop\New folder\QuanLyQuanCF\QuanLyQuanCafe\bin\Debug\FactoryDAO.pdb
+C:\Users\VOSONHIEP\Desktop\New folder\QuanLyQuanCF\QuanLyQuanCafe\bin\Debug\IAccountInterface.pdb
+C:\Users\VOSONHIEP\Desktop\New folder\QuanLyQuanCF\QuanLyQuanCafe\bin\Debug\IDal.pdb
+C:\Users\VOSONHIEP\Desktop\New folder\QuanLyQuanCF\QuanLyQuanCafe\bin\Debug\Unity.Abstractions.pdb
+C:\Users\VOSONHIEP\Desktop\New folder\QuanLyQuanCF\QuanLyQuanCafe\bin\Debug\Unity.Container.pdb
+C:\Users\VOSONHIEP\Desktop\New folder\QuanLyQuanCF\QuanLyQuanCafe\bin\Debug\ValidationStratergy.pdb
+C:\Users\VOSONHIEP\Desktop\New folder\QuanLyQuanCF\QuanLyQuanCafe\bin\Debug\AccountLibrary.pdb
+C:\Users\VOSONHIEP\Desktop\New folder\QuanLyQuanCF\QuanLyQuanCafe\bin\Debug\AdoDAO.pdb
+C:\Users\VOSONHIEP\Desktop\New folder\QuanLyQuanCF\QuanLyQuanCafe\bin\Debug\Stratergy.pdb

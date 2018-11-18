@@ -1,0 +1,9 @@
+C:\Users\VOSONHIEP\Desktop\New folder\QuanLyQuanCF\AccountLibrary\bin\Debug\AccountLibrary.dll
+C:\Users\VOSONHIEP\Desktop\New folder\QuanLyQuanCF\AccountLibrary\bin\Debug\AccountLibrary.pdb
+C:\Users\VOSONHIEP\Desktop\New folder\QuanLyQuanCF\AccountLibrary\bin\Debug\IAccountInterface.dll
+C:\Users\VOSONHIEP\Desktop\New folder\QuanLyQuanCF\AccountLibrary\bin\Debug\Stratergy.dll
+C:\Users\VOSONHIEP\Desktop\New folder\QuanLyQuanCF\AccountLibrary\bin\Debug\IAccountInterface.pdb
+C:\Users\VOSONHIEP\Desktop\New folder\QuanLyQuanCF\AccountLibrary\bin\Debug\Stratergy.pdb
+C:\Users\VOSONHIEP\Desktop\New folder\QuanLyQuanCF\AccountLibrary\obj\Debug\AccountLibrary.csprojResolveAssemblyReference.cache
+C:\Users\VOSONHIEP\Desktop\New folder\QuanLyQuanCF\AccountLibrary\obj\Debug\AccountLibrary.dll
+C:\Users\VOSONHIEP\Desktop\New folder\QuanLyQuanCF\AccountLibrary\obj\Debug\AccountLibrary.pdb

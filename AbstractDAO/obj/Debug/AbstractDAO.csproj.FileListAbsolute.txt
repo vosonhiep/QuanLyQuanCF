@@ -1,0 +1,11 @@
+C:\Users\VOSONHIEP\Desktop\New folder\QuanLyQuanCF\AbstractDAO\bin\Debug\AbstractDAO.dll
+C:\Users\VOSONHIEP\Desktop\New folder\QuanLyQuanCF\AbstractDAO\bin\Debug\AbstractDAO.pdb
+C:\Users\VOSONHIEP\Desktop\New folder\QuanLyQuanCF\AbstractDAO\bin\Debug\IAccountInterface.dll
+C:\Users\VOSONHIEP\Desktop\New folder\QuanLyQuanCF\AbstractDAO\bin\Debug\IDal.dll
+C:\Users\VOSONHIEP\Desktop\New folder\QuanLyQuanCF\AbstractDAO\bin\Debug\Stratergy.dll
+C:\Users\VOSONHIEP\Desktop\New folder\QuanLyQuanCF\AbstractDAO\bin\Debug\IAccountInterface.pdb
+C:\Users\VOSONHIEP\Desktop\New folder\QuanLyQuanCF\AbstractDAO\bin\Debug\IDal.pdb
+C:\Users\VOSONHIEP\Desktop\New folder\QuanLyQuanCF\AbstractDAO\bin\Debug\Stratergy.pdb
+C:\Users\VOSONHIEP\Desktop\New folder\QuanLyQuanCF\AbstractDAO\obj\Debug\AbstractDAO.csprojResolveAssemblyReference.cache
+C:\Users\VOSONHIEP\Desktop\New folder\QuanLyQuanCF\AbstractDAO\obj\Debug\AbstractDAO.dll
+C:\Users\VOSONHIEP\Desktop\New folder\QuanLyQuanCF\AbstractDAO\obj\Debug\AbstractDAO.pdb
