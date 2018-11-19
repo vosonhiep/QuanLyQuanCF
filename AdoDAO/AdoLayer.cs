@@ -29,7 +29,7 @@ namespace AdoDAO
 
         }
         protected abstract void ExecuteQuery(IBo obj);
-        protected abstract List<IBo> ExecuteNonQuery();
+        protected abstract List<IBo> ExecuteNonQuery(string query);
         // Design pattern :- Template pattern
         public void Execute(IBo obj)
         {
@@ -37,11 +37,11 @@ namespace AdoDAO
             ExecuteQuery(obj);
             Close();
         }
-        public List<IBo> ExecuteRead()
+        public List<IBo> ExecuteRead(string query)
         {
             List<IBo> obj = new List<IBo>();
             Open();
-            obj = ExecuteNonQuery();
+            obj = ExecuteNonQuery(query);
             Close();
             return obj;
         }
@@ -57,14 +57,15 @@ namespace AdoDAO
     public class AccountDAO : AdoAbstractTemplate<IAccount>
     {
 
-        public override List<IAccount> Get()
+        public override List<IAccount> Get(string query)
         {
-            return ExecuteRead();
+            return ExecuteRead(query);
         }
-        protected override List<IAccount> ExecuteNonQuery()
+        protected override List<IAccount> ExecuteNonQuery(string query)
         {
-            List<IAccount> o = new List<IAccount>();
-            objCommand.CommandText = "select * from Account";
+            List<IAccount> listIAccount = new List<IAccount>();
+            // objCommand.CommandText = "select * from Account";
+            objCommand.CommandText = query;
             SqlDataReader rd = objCommand.ExecuteReader();
             while (rd.Read())
             {
@@ -82,9 +83,9 @@ namespace AdoDAO
                 i.Id = Convert.ToInt16(rd["Id"].ToString());
                 i.Email = rd["Email"].ToString();
                 i.IsUsed = (bool)rd["IsUsed"];
-                o.Add(i);
+                listIAccount.Add(i);
             }
-            return o;
+            return listIAccount;
         }
         protected override void ExecuteQuery(IAccount obj)
         {

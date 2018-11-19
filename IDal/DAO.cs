@@ -12,7 +12,6 @@ namespace IDAO
         void Add(AnyType obj);
         void Delete(AnyType obj);
         void Save();
-        List<AnyType> Get();
-
+        List<AnyType> Get(string query);
     }
 }

@@ -12,6 +12,7 @@ namespace AbstractDAO
     {
 
         protected List<Anytype> Collection = new List<Anytype>();
+        protected Anytype cur;
         public void Add(Anytype obj)
         {
             Collection.Add(obj);
@@ -26,11 +27,10 @@ namespace AbstractDAO
             throw new NotImplementedException();
         }
 
-        public virtual List<Anytype> Get()
+        public virtual List<Anytype> Get(string query)
         {
             return Collection;
         }
-
 
 
 

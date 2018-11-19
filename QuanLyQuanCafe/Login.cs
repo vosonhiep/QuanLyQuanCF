@@ -1,4 +1,6 @@
-﻿using QuanLyQuanCafe.DAO;
+﻿using Facade;
+using IAccountInterface;
+using QuanLyQuanCafe.DAO;
 using QuanLyQuanCafe.DTO;
 using System;
 using System.Collections.Generic;
@@ -14,6 +16,9 @@ namespace QuanLyQuanCafe
 {
     public partial class fLogin : Form
     {
+        AccountUiFacade Fac = new AccountUiFacade("AdoAccDAO");
+        IAccount icust = null;
+
         public fLogin()
         {
             InitializeComponent();
@@ -29,29 +34,32 @@ namespace QuanLyQuanCafe
 
         public int Login(string userName, string passWord)
         {
-            return AccountDAO.getInstance.Login(userName, passWord);
+            return AccountDAO.Instance.Login(userName, passWord);
         }
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            string userName = txbUsername.Text;
-            string passWord = txbPassword.Text;
-            int rs = Login(userName, passWord);
-            if (rs == 1)
-            {
-                Account loginAccount = AccountDAO.getInstance.GetAccountByUserName(userName);
+            //string userName = txbUsername.Text;
+            //string passWord = txbPassword.Text;
+            //int rs = Login(userName, passWord);
+            //if (rs == 1)
+            //{
+            //    Account loginAccount = AccountDAO.Instance.GetAccountByUserName(userName);
 
-                fTableManager f = new fTableManager(loginAccount);
-                this.Hide();
-                f.ShowDialog();
-                this.Show();
-            }
-            else if (rs == 0)
-            {
-                MessageBox.Show("Sai tên tài khoản hoặc mật khẩu!");
-            }
-            else
-                MessageBox.Show("Tài khoản này đã bị khóa!");
+            //    fTableManager f = new fTableManager(loginAccount);
+            //    this.Hide();
+            //    f.ShowDialog();
+            //    this.Show();
+            //}
+            //else if (rs == 0)
+            //{
+            //    MessageBox.Show("Sai tên tài khoản hoặc mật khẩu!");
+            //}
+            //else
+            //    MessageBox.Show("Tài khoản này đã bị khóa!");
+
+            
+
             
         }
 

@@ -17,7 +17,7 @@ namespace QuanLyQuanCafe
     public partial class fTableManager : Form
     {
         private Account loginAccount;
-
+        List<Table> tableList = null;
         public Account LoginAccount
         {
             get { return loginAccount; }
@@ -55,11 +55,13 @@ namespace QuanLyQuanCafe
             cbFood.DataSource = listFood;
             cbFood.DisplayMember = "Name";
         }
+
         void LoadTable()
         {
             flpTable.Controls.Clear();
 
-            List<Table> tableList = TableDAO.Instance.LoadTableList();
+            if(tableList == null)
+                tableList = TableDAO.Instance.LoadTableList();
 
             foreach (Table item in tableList)
             {
@@ -141,7 +143,8 @@ namespace QuanLyQuanCafe
         {
             fAdmin f = new fAdmin();
             f.loginAccount = LoginAccount;
-            
+            f.tableList = tableList;
+
             f.InsertFood += f_InsertFood;
             f.UpdateFood += f_UpdateFood;
             f.DeleteFood += f_DeleteFood;

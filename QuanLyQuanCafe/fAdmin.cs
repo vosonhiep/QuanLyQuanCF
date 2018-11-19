@@ -17,21 +17,23 @@ namespace QuanLyQuanCafe
 {
     public partial class fAdmin : Form
     {
-
+        public List<Table> tableList = null;
+        public Account loginAccount;
+        public List<IAccount> acclist = null;
         AccountUiFacade Fac = new AccountUiFacade("AdoAccDAO");
         IAccount icust = null;
 
         BindingSource foodList = new BindingSource();
-        BindingSource accountList = new BindingSource();
+        //BindingSource accountList = new BindingSource();
         BindingSource categoryList = new BindingSource();
-        BindingSource tableList = new BindingSource();
+        //BindingSource tableList = new BindingSource();
 
         private bool isFlagFood = false;
         private bool isFlagCategory = false;
         private bool isFlagTable = false;
         private bool isFlagAccount = false;
 
-        public Account loginAccount;
+        
         public fAdmin()
         {
             InitializeComponent();
@@ -52,14 +54,14 @@ namespace QuanLyQuanCafe
 
 
             dtgvFood.DataSource = foodList;
-            dtgvAccount.DataSource = accountList;
+            dtgvAccount.DataSource = acclist;
             dtgvCategory.DataSource = categoryList;
             dtgvTable.DataSource = tableList;
 
             //dtgvCategory.Columns["IsUsed"].Visible = false;             // ẩn cột IsUsed
 
             AddFoodBinding();
-            // AddAccountBinding();
+            AddAccountBinding();
             AddCategoryBinding();
             AddTableBinding();
         }
@@ -69,7 +71,7 @@ namespace QuanLyQuanCafe
         {
             txbAccountUsername.DataBindings.Add(new Binding("Text", dtgvAccount.DataSource, "UserName", true, DataSourceUpdateMode.Never));
             txbDisplayName.DataBindings.Add(new Binding("Text", dtgvAccount.DataSource, "DisplayName", true, DataSourceUpdateMode.Never));
-            cbAccountType.DataBindings.Add(new Binding("Text", dtgvAccount.DataSource, "Type", true, DataSourceUpdateMode.Never));
+            //cbAccountType.DataBindings.Add(new Binding("Text", dtgvAccount.DataSource, "Type", true, DataSourceUpdateMode.Never));
 
             //nmAccountType.DataBindings.Add(new Binding("Text", dtgvAccount.DataSource, "Type", true, DataSourceUpdateMode.Never));
 
@@ -112,7 +114,9 @@ namespace QuanLyQuanCafe
         {
             //accountList.DataSource = AccountDAO.getInstance.GetListAccount();
             Fac = new AccountUiFacade("AdoAccDAO");
-            dtgvAccount.DataSource = Fac.GetAccounts();
+            string query = "select * from Account where IsUsed = 'true'";
+            acclist = Fac.GetAccounts(query);
+            //dtgvAccount.DataSource = Fac.GetAccounts(query);
         }
 
         void LoadListFood()
@@ -127,7 +131,8 @@ namespace QuanLyQuanCafe
 
         void LoadListTable()
         {
-            tableList.DataSource = TableDAO.Instance.LoadTableList();
+            if(tableList == null)
+                tableList = TableDAO.Instance.LoadTableList();
         }
 
         void LoadCategoryIntoCombobox(ComboBox cb)
@@ -845,6 +850,49 @@ namespace QuanLyQuanCafe
 
         #endregion
 
+        #region Event Bill
+
+        private void btnFirst_Click(object sender, EventArgs e)
+        {
+            txbPage.Text = "1";
+        }
+
+        private void btnPrevious_Click(object sender, EventArgs e)
+        {
+            int page = Convert.ToInt32(txbPage.Text);
+
+            if (page > 1)
+
+                page--;
+            txbPage.Text = page.ToString();
+        }
+
+        private void btnNext_Click(object sender, EventArgs e)
+        {
+            int page = Convert.ToInt32(txbPage.Text);
+            int sumRecord = BillDAO.Instance.GetNumBillListByDate(dtpkFromDate.Value, dtpkToDate.Value);
+
+            if (page < sumRecord)
+                page++;
+            txbPage.Text = page.ToString();
+        }
+
+        private void btnLast_Click(object sender, EventArgs e)
+        {
+            int sumRecord = BillDAO.Instance.GetNumBillListByDate(dtpkFromDate.Value, dtpkToDate.Value);
+            int lastPage = sumRecord / 10;
+            if (sumRecord % 10 != 0)
+                lastPage += 1;
+
+            txbPage.Text = lastPage.ToString();
+        }
+
+        private void txbPage_TextChanged(object sender, EventArgs e)
+        {
+            dtgvBill.DataSource = BillDAO.Instance.GetBillListByDateAndPage(dtpkFromDate.Value, dtpkToDate.Value, Convert.ToInt32(txbPage.Text));
+        }
+
+        #endregion
 
 
         private void btnViewbill_Click(object sender, EventArgs e)
@@ -854,16 +902,6 @@ namespace QuanLyQuanCafe
 
         #endregion
 
-
-
-
-
-
-
-        void GetFoodById(int id)
-        {
-
-        }
 
         /// <summary>
         /// Kiểm tra xem món ăn này có trong danh sách bàn ăn không
@@ -910,9 +948,6 @@ namespace QuanLyQuanCafe
             add { updateCategory += value; }
             remove { updateCategory -= value; }
         }
-
-
-
 
 
         private void btnShowAccount_Click(object sender, EventArgs e)
@@ -965,7 +1000,7 @@ namespace QuanLyQuanCafe
                 MessageBox.Show("Không được xóa tài khoản đang sử dụng");
                 return;
             }
-            if (AccountDAO.getInstance.DeleteAccount(userName))
+            if (AccountDAO.Instance.DeleteAccount(userName))
             {
                 MessageBox.Show("Xóa tài khoản thành công");
             }
@@ -980,7 +1015,7 @@ namespace QuanLyQuanCafe
 
         void ResetPassword(string userName)
         {
-            AccountDAO.getInstance.ResetPssword(userName);
+            AccountDAO.Instance.ResetPssword(userName);
         }
 
         //private void btnAddAccount_Click(object sender, EventArgs e)
@@ -1094,9 +1129,10 @@ namespace QuanLyQuanCafe
                 if (icust.Validate() == false)
                     return;
                 Fac.Save(icust);
-
+                acclist.Add(icust);
+                ControlItemAccount(isFlagAccount);
             }
-            dtgvAccount.DataSource = Fac.GetAccounts();
+            dtgvAccount.DataSource = acclist;
         }
 
         private bool CheckDataEmptyAccount()
@@ -1180,7 +1216,7 @@ namespace QuanLyQuanCafe
                         string displayName = txbDisplayName.Text;
                         int idAccount = Convert.ToInt32(txbAccountID.Text);
 
-                        if (AccountDAO.getInstance.UpdateAccount(idAccount, username, displayName, type))
+                        if (AccountDAO.Instance.UpdateAccount(idAccount, username, displayName, type))
                         {
                             MessageBox.Show("Sửa tài khoản thành công");
                             LoadListAccount();
@@ -1215,62 +1251,10 @@ namespace QuanLyQuanCafe
             ResetPassword(userName);
         }
 
-        private void btnFirst_Click(object sender, EventArgs e)
-        {
-            txbPage.Text = "1";
-        }
-
-        private void btnPrevious_Click(object sender, EventArgs e)
-        {
-            int page = Convert.ToInt32(txbPage.Text);
-
-            if (page > 1)
-
-                page--;
-            txbPage.Text = page.ToString();
-        }
-
-        private void btnNext_Click(object sender, EventArgs e)
-        {
-            int page = Convert.ToInt32(txbPage.Text);
-            int sumRecord = BillDAO.Instance.GetNumBillListByDate(dtpkFromDate.Value, dtpkToDate.Value);
-
-            if (page < sumRecord)
-                page++;
-            txbPage.Text = page.ToString();
-        }
-
-        private void btnLast_Click(object sender, EventArgs e)
-        {
-            int sumRecord = BillDAO.Instance.GetNumBillListByDate(dtpkFromDate.Value, dtpkToDate.Value);
-            int lastPage = sumRecord / 10;
-            if (sumRecord % 10 != 0)
-                lastPage += 1;
-
-            txbPage.Text = lastPage.ToString();
-        }
-
-        private void txbPage_TextChanged(object sender, EventArgs e)
-        {
-            dtgvBill.DataSource = BillDAO.Instance.GetBillListByDateAndPage(dtpkFromDate.Value, dtpkToDate.Value, Convert.ToInt32(txbPage.Text));
-        }
-
         private void dtpkToDate_ValueChanged(object sender, EventArgs e)
         {
 
         }
-
-        private void btnAccountCancel_Click(object sender, EventArgs e)
-        {
-            //isFlagAccount = false;
-            //ControlItemAccount(isFlagAccount);
-            //btnAddAccount.Text = "Thêm";
-            //btnEditAccount.Text = "Sửa";
-            //btnAccountCancel.Visible = false;
-        }
-
-
-
 
     }
 }

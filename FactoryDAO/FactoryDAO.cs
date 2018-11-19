@@ -13,7 +13,7 @@ namespace FactoryDAO
     public static class FactoryDAO<AnyType>
     {
         static IUnityContainer container;
-        public static IDataLayer<AnyType> getDal(string Daltype)
+        public static IDataLayer<AnyType> getDao(string Daotype)
         {
             // Design pattern :- Lazy Loading ( Improve the below code using Lazy keyword).
             if (container == null)
@@ -24,7 +24,7 @@ namespace FactoryDAO
 
                 // Design pattern :- RIP ( Replace IF with Polymorphism)
             }
-            return (IDataLayer<AnyType>)container.Resolve<IDataLayer<AnyType>>(Daltype);
+            return (IDataLayer<AnyType>)container.Resolve<IDataLayer<AnyType>>(Daotype);
         }
     }
 }

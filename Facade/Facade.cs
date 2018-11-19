@@ -12,13 +12,14 @@ namespace Facade
 {
     public class AccountUiFacade
     {
-        IDataLayer<IAccount> dal;
+        IDataLayer<IAccount> dao;
+        IAccount iAcc;
         private AccountBase custOld; // Design pattern :- Memento pattern
         List<IAccount> custcoll;
         int SelectedIndex = 0;
-        public AccountUiFacade(string DalType)
+        public AccountUiFacade(string DaoType)
         {
-            dal = FactoryDAO<IAccount>.getDal(DalType);
+            dao = FactoryDAO<IAccount>.getDao(DaoType);
         }
         public IAccount Get(string Type)
         {
@@ -34,17 +35,17 @@ namespace Facade
             return custcoll[Index].Clone();
 
         }
-        public List<IAccount> GetAccounts()
+        public List<IAccount> GetAccounts(string query)
         {
-            custcoll = dal.Get();
+            custcoll = dao.Get(query);
             return custcoll;
         }
         public void Save(IAccount Base)
         {
             // Design pattern :- Facade pattern
             Base.Validate();
-            dal.Add(Base);
-            dal.Save();
+            dao.Add(Base);
+            dao.Save();
         }
     }
 }

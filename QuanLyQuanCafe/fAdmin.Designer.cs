@@ -138,7 +138,6 @@
             this.label12 = new System.Windows.Forms.Label();
             this.pndtgvAccount = new System.Windows.Forms.Panel();
             this.dtgvAccount = new System.Windows.Forms.DataGridView();
-            this.btnAccountCancel = new System.Windows.Forms.Button();
             this.tcAdmin.SuspendLayout();
             this.tpBill.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -910,7 +909,6 @@
             // 
             // panel23
             // 
-            this.panel23.Controls.Add(this.btnAccountCancel);
             this.panel23.Controls.Add(this.btnShowAccount);
             this.panel23.Controls.Add(this.btnEditAccount);
             this.panel23.Controls.Add(this.btnDeleteAccount);
@@ -1254,17 +1252,6 @@
             this.dtgvAccount.Size = new System.Drawing.Size(417, 373);
             this.dtgvAccount.TabIndex = 0;
             // 
-            // btnAccountCancel
-            // 
-            this.btnAccountCancel.Location = new System.Drawing.Point(81, 3);
-            this.btnAccountCancel.Name = "btnAccountCancel";
-            this.btnAccountCancel.Size = new System.Drawing.Size(75, 55);
-            this.btnAccountCancel.TabIndex = 4;
-            this.btnAccountCancel.Text = "Xem";
-            this.btnAccountCancel.UseVisualStyleBackColor = true;
-            this.btnAccountCancel.Visible = false;
-            this.btnAccountCancel.Click += new System.EventHandler(this.btnAccountCancel_Click);
-            // 
             // fAdmin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1456,6 +1443,5 @@
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.TextBox txbPhone;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Button btnAccountCancel;
     }
 }
