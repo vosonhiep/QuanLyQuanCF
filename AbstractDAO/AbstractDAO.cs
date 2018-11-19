@@ -12,7 +12,6 @@ namespace AbstractDAO
     {
 
         protected List<Anytype> Collection = new List<Anytype>();
-        protected Anytype cur;
         public void Add(Anytype obj)
         {
             Collection.Add(obj);
