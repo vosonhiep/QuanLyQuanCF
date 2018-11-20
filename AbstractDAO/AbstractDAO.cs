@@ -23,15 +23,13 @@ namespace AbstractDAO
 
         public virtual void Save()
         {
-            throw new NotImplementedException();
+            
         }
 
         public virtual List<Anytype> Get(string query)
         {
             return Collection;
         }
-
-
 
     }
 }

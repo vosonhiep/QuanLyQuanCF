@@ -17,7 +17,7 @@ namespace QuanLyQuanCafe
     public partial class fLogin : Form
     {
         AccountUiFacade Fac = new AccountUiFacade("AdoAccDAO");
-        IAccount icust = null;
+        List<IAccount> listAcc = null;
 
         public fLogin()
         {
@@ -32,35 +32,30 @@ namespace QuanLyQuanCafe
             }
         }
 
-        public int Login(string userName, string passWord)
+        public bool Login(string userName, string passWord)
         {
-            return AccountDAO.Instance.Login(userName, passWord);
+            //return Fac.GetAccounts(string.Format("select * from Account where Username = N'{0}' and IsUsed = 'true'", userName));
+            listAcc = Fac.GetAccounts("select * from Account where IsUsed = 'true'");
+           return listAcc.Where(x => x.UserName == userName).SingleOrDefault() != null ? true : false;
         }
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            //string userName = txbUsername.Text;
-            //string passWord = txbPassword.Text;
-            //int rs = Login(userName, passWord);
-            //if (rs == 1)
-            //{
-            //    Account loginAccount = AccountDAO.Instance.GetAccountByUserName(userName);
+            string userName = txbUsername.Text;
+            string passWord = txbPassword.Text;
+            if(Login(userName, passWord))
+            {
+                IAccount loginAccount = listAcc.Where(x => x.UserName == userName).SingleOrDefault();
 
-            //    fTableManager f = new fTableManager(loginAccount);
-            //    this.Hide();
-            //    f.ShowDialog();
-            //    this.Show();
-            //}
-            //else if (rs == 0)
-            //{
-            //    MessageBox.Show("Sai tên tài khoản hoặc mật khẩu!");
-            //}
-            //else
-            //    MessageBox.Show("Tài khoản này đã bị khóa!");
-
-            
-
-            
+                fTableManager f = new fTableManager(loginAccount);
+                this.Hide();
+                f.ShowDialog();
+                this.Show();
+            }
+            else 
+            {
+                MessageBox.Show("Sai tên tài khoản hoặc mật khẩu!");
+            }
         }
 
         private void btnExit_Click(object sender, EventArgs e)

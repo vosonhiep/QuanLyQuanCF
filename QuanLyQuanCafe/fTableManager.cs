@@ -1,4 +1,5 @@
-﻿using QuanLyQuanCafe.DAO;
+﻿using IAccountInterface;
+using QuanLyQuanCafe.DAO;
 using QuanLyQuanCafe.DTO;
 using System;
 using System.Collections.Generic;
@@ -16,14 +17,18 @@ namespace QuanLyQuanCafe
 {
     public partial class fTableManager : Form
     {
-        private Account loginAccount;
+        private IAccount loginAccount;
         List<Table> tableList = null;
-        public Account LoginAccount
+        public IAccount LoginAccount
         {
             get { return loginAccount; }
-            set { loginAccount = value; ChangeAccount(loginAccount.Type); }
+            set 
+            {
+                loginAccount = value;
+                //ChangeAccount(loginAccount);
+            }
         }
-        public fTableManager(Account acc)
+        public fTableManager(IAccount acc)
         {
             InitializeComponent();
 

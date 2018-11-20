@@ -1,4 +1,5 @@
-﻿using QuanLyQuanCafe.DAO;
+﻿using IAccountInterface;
+using QuanLyQuanCafe.DAO;
 using QuanLyQuanCafe.DTO;
 using System;
 using System.Collections.Generic;
@@ -14,20 +15,20 @@ namespace QuanLyQuanCafe
 {
     public partial class fAccountProfile : Form
     {
-        private Account loginAccount;
+        private IAccount loginAccount;
 
-        public Account LoginAccount
+        public IAccount LoginAccount
         {
             get { return loginAccount; }
             set { loginAccount = value; ChangeAccount(loginAccount); }
         }
-        public fAccountProfile(Account acc)
+        public fAccountProfile(IAccount acc)
         {
             InitializeComponent();
             LoginAccount = acc;
         }
 
-        void ChangeAccount(Account acc)
+        void ChangeAccount(IAccount acc)
         {
             txbUsername.Text = LoginAccount.UserName;
             txbDisPlayName.Text = LoginAccount.DisplayName;

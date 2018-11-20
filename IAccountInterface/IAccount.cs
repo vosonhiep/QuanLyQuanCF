@@ -32,22 +32,21 @@ namespace IAccountInterface
     }
     public interface IAccount : IBo
     {
-        IValidationStratergy<IAccount> ValidationType { get; }
+        int Id { get; set; }
         string UserName { get; set; }
         string Password { get; set; }
         string DisplayName { get; set; }
-        string Type { get; set; }
-        string Phone { get; set; }
         bool GioiTinh { get; set; }
+        string Phone { get; set; }
         string Address { get; set; }
         string CMND { get; set; }
-        DateTime Birthday { get; set; }
         string Email { get; set; }
+        DateTime Birthday { get; set; }
+        string Type { get; set; }
         string ImageID { get; set; }
-        int Id { get; set; }
         bool IsUsed { get; set; }
         IAccount Clone();
-
+        IValidationStratergy<IAccount> ValidationType { get; }
     }
 
     public abstract class AccountBase : BoBase, IAccount

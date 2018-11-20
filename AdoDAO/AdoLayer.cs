@@ -64,7 +64,7 @@ namespace AdoDAO
         protected override List<IAccount> ExecuteNonQuery(string query)
         {
             List<IAccount> listIAccount = new List<IAccount>();
-            // objCommand.CommandText = "select * from Account";
+            //objCommand.CommandText = "select * from Account";
             objCommand.CommandText = query;
             SqlDataReader rd = objCommand.ExecuteReader();
             while (rd.Read())
@@ -89,9 +89,12 @@ namespace AdoDAO
         }
         protected override void ExecuteQuery(IAccount obj)
         {
-            objCommand.CommandText = string.Format("INSERT dbo.Account( UserName , PassWord , DisplayName , Phone, ImageID, Address, GioiTinh, CMND, Birthday, Email, Type , IsUsed ) " +
-                                                                        " VALUES  ( N'{0}' , N'{1}' , N'{2}' , N'{3}' , N'{4}', N'{5}', N'{6}', N'{7}', N'{8}', N'{9}', N'{10}', N'{11}' ) ",
-                                                                        obj.UserName, obj.Password, obj.DisplayName, obj.Phone, obj.ImageID, obj.Address, obj.GioiTinh, obj.CMND, obj.Birthday, obj.Email, obj.Type, obj.IsUsed);
+            //objCommand.CommandText = string.Format("INSERT dbo.Account( UserName , PassWord , DisplayName , Phone, ImageID, Address, GioiTinh, CMND, Birthday, Email, Type , IsUsed ) " +
+            //                                                            " VALUES  ( N'{0}' , N'{1}' , N'{2}' , N'{3}' , N'{4}', N'{5}', N'{6}', N'{7}', N'{8}', N'{9}', N'{10}', N'{11}' ) ",
+            //                                                            obj.UserName, obj.Password, obj.DisplayName, obj.Phone, obj.ImageID, obj.Address, obj.GioiTinh, obj.CMND, obj.Birthday, obj.Email, obj.Type, obj.IsUsed);
+
+            objCommand.CommandText = string.Format("EXEC dbo.USP_UpdateAccount @idAccount = {0} , @userName = N'{1}' , @displayName = N'{2}' , @password = N'{3}' , @newPassword = N'{4}' , @type = N'{5}' , @phone = '{6}' , @GioiTinh = {7} , @Address = N'{8}' , @CMND = '{9}' , @ImageId = N'{10}' , @Birthday = '{11}' , @Email = N'{12}' , @IsUsed = {13} ",
+                                                                                         obj.Id, obj.UserName, obj.DisplayName, obj.Password, obj.Password, obj.Type, obj.Phone, obj.GioiTinh, obj.Address, obj.CMND, obj.ImageID, obj.Birthday, obj.Email, obj.IsUsed);
             objCommand.ExecuteNonQuery();
         }
     }

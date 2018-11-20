@@ -118,7 +118,7 @@ namespace ValidationStratergy
             }
             
             
-            if (obj.Birthday <= DateTime.Now)
+            if (obj.Birthday > DateTime.Now)
             {
                 return false;
                 throw new Exception("Birthday is not proper");

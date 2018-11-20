@@ -13,7 +13,6 @@ namespace Facade
     public class AccountUiFacade
     {
         IDataLayer<IAccount> dao;
-        IAccount iAcc;
         private AccountBase custOld; // Design pattern :- Memento pattern
         List<IAccount> custcoll;
         int SelectedIndex = 0;
@@ -45,6 +44,12 @@ namespace Facade
             // Design pattern :- Facade pattern
             Base.Validate();
             dao.Add(Base);
+            dao.Save();
+        }
+
+        public void Edit(IAccount Base)
+        {
+            Base.Validate();
             dao.Save();
         }
     }

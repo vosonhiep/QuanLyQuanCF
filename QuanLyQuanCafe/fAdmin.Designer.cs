@@ -127,7 +127,7 @@
             this.txbAccountID = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
             this.btnResetPassword = new System.Windows.Forms.Button();
-            this.panel26 = new System.Windows.Forms.Panel();
+            this.pnType = new System.Windows.Forms.Panel();
             this.cbAccountType = new System.Windows.Forms.ComboBox();
             this.label10 = new System.Windows.Forms.Label();
             this.panel27 = new System.Windows.Forms.Panel();
@@ -179,7 +179,7 @@
             this.panel6.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel5.SuspendLayout();
-            this.panel26.SuspendLayout();
+            this.pnType.SuspendLayout();
             this.panel27.SuspendLayout();
             this.panel28.SuspendLayout();
             this.pndtgvAccount.SuspendLayout();
@@ -237,7 +237,6 @@
             this.dtpkToDate.Name = "dtpkToDate";
             this.dtpkToDate.Size = new System.Drawing.Size(200, 20);
             this.dtpkToDate.TabIndex = 1;
-            this.dtpkToDate.ValueChanged += new System.EventHandler(this.dtpkToDate_ValueChanged);
             // 
             // dtpkFromDate
             // 
@@ -967,7 +966,7 @@
             this.panel24.Controls.Add(this.panel3);
             this.panel24.Controls.Add(this.panel5);
             this.panel24.Controls.Add(this.btnResetPassword);
-            this.panel24.Controls.Add(this.panel26);
+            this.panel24.Controls.Add(this.pnType);
             this.panel24.Controls.Add(this.panel27);
             this.panel24.Controls.Add(this.panel28);
             this.panel24.Location = new System.Drawing.Point(436, 70);
@@ -1150,14 +1149,14 @@
             this.btnResetPassword.UseVisualStyleBackColor = true;
             this.btnResetPassword.Click += new System.EventHandler(this.btnResetPassword_Click);
             // 
-            // panel26
+            // pnType
             // 
-            this.panel26.Controls.Add(this.cbAccountType);
-            this.panel26.Controls.Add(this.label10);
-            this.panel26.Location = new System.Drawing.Point(7, 123);
-            this.panel26.Name = "panel26";
-            this.panel26.Size = new System.Drawing.Size(281, 31);
-            this.panel26.TabIndex = 3;
+            this.pnType.Controls.Add(this.cbAccountType);
+            this.pnType.Controls.Add(this.label10);
+            this.pnType.Location = new System.Drawing.Point(7, 123);
+            this.pnType.Name = "pnType";
+            this.pnType.Size = new System.Drawing.Size(281, 31);
+            this.pnType.TabIndex = 3;
             // 
             // cbAccountType
             // 
@@ -1224,6 +1223,7 @@
             this.txbAccountUsername.ReadOnly = true;
             this.txbAccountUsername.Size = new System.Drawing.Size(150, 20);
             this.txbAccountUsername.TabIndex = 1;
+            this.txbAccountUsername.TextChanged += new System.EventHandler(this.txbAccountUsername_TextChanged);
             // 
             // label12
             // 
@@ -1319,8 +1319,8 @@
             this.panel3.PerformLayout();
             this.panel5.ResumeLayout(false);
             this.panel5.PerformLayout();
-            this.panel26.ResumeLayout(false);
-            this.panel26.PerformLayout();
+            this.pnType.ResumeLayout(false);
+            this.pnType.PerformLayout();
             this.panel27.ResumeLayout(false);
             this.panel27.PerformLayout();
             this.panel28.ResumeLayout(false);
@@ -1407,7 +1407,7 @@
         private System.Windows.Forms.Button btnAddAccount;
         private System.Windows.Forms.Panel panel24;
         private System.Windows.Forms.Button btnResetPassword;
-        private System.Windows.Forms.Panel panel26;
+        private System.Windows.Forms.Panel pnType;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Panel panel27;
         private System.Windows.Forms.TextBox txbDisplayName;
