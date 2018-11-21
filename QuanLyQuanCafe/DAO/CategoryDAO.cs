@@ -75,7 +75,7 @@ namespace QuanLyQuanCafe.DAO
         {
            // FoodDAO.Instance.DeleteBillInfoByFoodID(idCategory);
 
-            string query = string.Format("UPDATE dbo.Food SET IsUsed = 'false' WHERE id = " + idCategory);
+            string query = string.Format("UPDATE dbo.FoodCategory SET IsUsed = 'false' WHERE id = " + idCategory);
             int result = DataProvider.Instance.ExecuteNonQuery(query);
             return result > 0;
         }

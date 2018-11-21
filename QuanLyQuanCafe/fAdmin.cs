@@ -40,7 +40,7 @@ namespace QuanLyQuanCafe
             Load();
         }
 
-        #region Load and Binding
+        #region Load Binding Edit Hidden
 
         void Load()
         {
@@ -52,21 +52,32 @@ namespace QuanLyQuanCafe
             LoadListCategory();
             LoadListTable();
 
-
             dtgvFood.DataSource = foodList;
             dtgvAccount.DataSource = acclist;
             dtgvCategory.DataSource = categoryList;
             dtgvTable.DataSource = tableList;
 
-            //dtgvCategory.Columns["IsUsed"].Visible = false;             // ẩn cột IsUsed
-
             AddFoodBinding();
             AddAccountBinding();
             AddCategoryBinding();
             AddTableBinding();
+
+            EditNameColumnsFood();
+            EditNameColumnsCategory();
+            EditNameColumnsTable();
+
+            HiddenColumnsFood();
+            HiddenColumnsCategory();
+            HiddenColumnsTable();
+            HiddenColumnsAccount();
+
+            WidthColumnsTable();
+            WidthColumnsCategory();
+            WidthColumnsFood();
+
         }
 
-
+        #region Binding
         void AddAccountBinding()
         {
             txbAccountID.DataBindings.Add(new Binding("Text", dtgvAccount.DataSource, "Id", true, DataSourceUpdateMode.Never));
@@ -77,7 +88,7 @@ namespace QuanLyQuanCafe
             txbCMND.DataBindings.Add(new Binding("Text", dtgvAccount.DataSource, "CMND", true, DataSourceUpdateMode.Never));
             txbEmail.DataBindings.Add(new Binding("Text", dtgvAccount.DataSource, "Email", true, DataSourceUpdateMode.Never));         
         }
-        // Biding GioiTinh and binding Type
+        // Biding GioiTinh, binding Type, binding GioiTinh
 
         private void txbAccountUsername_TextChanged(object sender, EventArgs e)
         {
@@ -101,7 +112,22 @@ namespace QuanLyQuanCafe
             txbFoodName.DataBindings.Add(new Binding("Text", dtgvFood.DataSource, "Name", true, DataSourceUpdateMode.Never));
             txbFoodID.DataBindings.Add(new Binding("Text", dtgvFood.DataSource, "ID", true, DataSourceUpdateMode.Never));
             nmFoodPrice.DataBindings.Add(new Binding("Value", dtgvFood.DataSource, "Price", true, DataSourceUpdateMode.Never));
+
+            
         }
+        void AddCategoryBinding()
+        {
+            txbCategoryName.DataBindings.Add(new Binding("Text", dtgvCategory.DataSource, "Name", true, DataSourceUpdateMode.Never));
+            txbCategoryID.DataBindings.Add(new Binding("Text", dtgvCategory.DataSource, "ID", true, DataSourceUpdateMode.Never));
+        }
+
+        void AddTableBinding()
+        {
+            txbTableID.DataBindings.Add(new Binding("Text", dtgvTable.DataSource, "ID", true, DataSourceUpdateMode.Never));
+            txbTableName.DataBindings.Add(new Binding("Text", dtgvTable.DataSource, "Name", true, DataSourceUpdateMode.Never));
+            cbTableStatus.DataBindings.Add(new Binding("Text", dtgvTable.DataSource, "Status", true, DataSourceUpdateMode.Never));
+        }
+
         //Binding Category for cb
         private void txbFoodID_TextChanged(object sender, EventArgs e)
         {
@@ -134,18 +160,32 @@ namespace QuanLyQuanCafe
             }
         }
 
-        void AddCategoryBinding()
+        #endregion
+
+        #region Edit name columns
+        void EditNameColumnsFood()
         {
-            txbCategoryName.DataBindings.Add(new Binding("Text", dtgvCategory.DataSource, "Name", true, DataSourceUpdateMode.Never));
-            txbCategoryID.DataBindings.Add(new Binding("Text", dtgvCategory.DataSource, "ID", true, DataSourceUpdateMode.Never));
+            dtgvFood.Columns["Name"].HeaderText = "Tên món";
+            dtgvFood.Columns["ID"].HeaderText = "Mã";
+            dtgvFood.Columns["Price"].HeaderText = "Giá";
         }
 
-        void AddTableBinding()
+        void EditNameColumnsCategory()
         {
-            txbTableID.DataBindings.Add(new Binding("Text", dtgvTable.DataSource, "ID", true, DataSourceUpdateMode.Never));
-            txbTableName.DataBindings.Add(new Binding("Text", dtgvTable.DataSource, "Name", true, DataSourceUpdateMode.Never));
-            cbTableStatus.DataBindings.Add(new Binding("Text", dtgvTable.DataSource, "Status", true, DataSourceUpdateMode.Never));
+            dtgvCategory.Columns["Name"].HeaderText = "Tên doanh mục";
+            dtgvCategory.Columns["ID"].HeaderText = "Mã";
         }
+
+        void EditNameColumnsTable()
+        {
+            dtgvTable.Columns["Name"].HeaderText = "Tên bàn";
+            dtgvTable.Columns["ID"].HeaderText = "Mã";
+            dtgvTable.Columns["Status"].HeaderText = "Trạng thái";
+        }
+
+        #endregion
+
+        #region Load data
 
         void LoadDateTimePickerBill()
         {
@@ -185,6 +225,61 @@ namespace QuanLyQuanCafe
             cb.DataSource = CategoryDAO.Instance.GetListCategory();
             cb.DisplayMember = "Name";
         }
+        
+        #endregion
+
+        #region Hidden Columns
+
+        void HiddenColumnsAccount()
+        {
+            dtgvAccount.Columns["Id"].Visible = false;
+            dtgvAccount.Columns["Password"].Visible = false;
+            dtgvAccount.Columns["GioiTinh"].Visible = false;
+            dtgvAccount.Columns["Birthday"].Visible = false;
+            dtgvAccount.Columns["ImageId"].Visible = false;
+            dtgvAccount.Columns["IsUsed"].Visible = false;
+            dtgvAccount.Columns["ValidationType"].Visible = false;
+        }
+
+        void HiddenColumnsFood()
+        {
+            dtgvFood.Columns["CategoryID"].Visible = false;
+            dtgvFood.Columns["IsUsed"].Visible = false;
+        }
+
+        void HiddenColumnsCategory()
+        {
+            dtgvCategory.Columns["IsUsed"].Visible = false;
+        }
+
+        void HiddenColumnsTable()
+        {
+            dtgvTable.Columns["IsUsed"].Visible = false;
+        }
+
+        #endregion
+
+        #region Set width for columns
+        void WidthColumnsTable()
+        {
+            dtgvTable.Columns["Id"].Width = 200;
+            dtgvTable.Columns["Name"].Width = 300;
+            dtgvTable.Columns["Status"].Width = 205;
+        }
+
+        void WidthColumnsFood()
+        {
+            dtgvFood.Columns["Id"].Width = 200;
+            dtgvFood.Columns["Name"].Width = 300;
+            dtgvFood.Columns["Price"].Width = 205;
+        }
+
+        void WidthColumnsCategory()
+        {
+            dtgvCategory.Columns["Id"].Width = 350;
+            dtgvCategory.Columns["Name"].Width = 355;
+        }
+        #endregion
 
         #endregion
 
@@ -633,8 +728,27 @@ namespace QuanLyQuanCafe
             }
         }
 
-        #endregion
+        private event EventHandler insertCategory;
+        public event EventHandler InsertCategory
+        {
+            add { insertCategory += value; }
+            remove { insertCategory -= value; }
+        }
 
+        private event EventHandler deleteCategory;
+        public event EventHandler DeleteCategory
+        {
+            add { deleteCategory += value; }
+            remove { deleteCategory -= value; }
+        }
+
+        private event EventHandler updateCategory;
+        public event EventHandler UpdateCategory
+        {
+            add { updateCategory += value; }
+            remove { updateCategory -= value; }
+        }
+        #endregion
 
         #region Event Table
 
@@ -676,15 +790,12 @@ namespace QuanLyQuanCafe
                 idTableNew = TableDAO.Instance.GetMaxIdTable();
                 txbTableID.Text = idTableNew.ToString();
                 txbTableName.Text = "";
-                cbTableStatus.SelectedIndex = 1;
+                cbTableStatus.SelectedIndex = 0;
 
                 ControlItemTable(isFlagTable);
                 btnEditTable.Enabled = false;
                 btnAddTable.Text = "Lưu";
                 isFlagTable = true;
-
-                string[] strStatus = { "Có người", "Trống" };
-                cbTableStatus.DataSource = strStatus;
 
             }
             else
@@ -693,7 +804,7 @@ namespace QuanLyQuanCafe
                 {
                     int idTable = Convert.ToInt32(txbTableID.Text);
                     string name = txbTableName.Text;
-                    string status = cbTableStatus.SelectedValue.ToString();
+                    string status = cbTableStatus.SelectedItem.ToString();
                     var rs = MessageBox.Show("Bạn muốn thêm bàn?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                     if (rs == DialogResult.Yes)
                     {
@@ -727,7 +838,6 @@ namespace QuanLyQuanCafe
                     dtgvTable.Enabled = true;
                 }
             }
-            //AddTableBinding();
         }
 
         private bool CheckDataEmptyTable()
@@ -909,9 +1019,6 @@ namespace QuanLyQuanCafe
             dtgvBill.DataSource = BillDAO.Instance.GetBillListByDateAndPage(dtpkFromDate.Value, dtpkToDate.Value, Convert.ToInt32(txbPage.Text));
         }
 
-        #endregion
-
-
         private void btnViewbill_Click(object sender, EventArgs e)
         {
             LoadListBillByDate(dtpkFromDate.Value, dtpkToDate.Value);
@@ -920,95 +1027,7 @@ namespace QuanLyQuanCafe
         #endregion
 
 
-        /// <summary>
-        /// Kiểm tra xem món ăn này có trong danh sách bàn ăn không
-        /// </summary>
-        /// <param name="idFood"></param>
-        //bool IsFoodExistInTable(int idFood)
-        //{
-        //    Food itemFood = FoodDAO.Instance.GetFoodByID(idFood);
-        //    List<Table> tableList = TableDAO.Instance.LoadTableList();
-
-        //    foreach (Table item in tableList)
-        //    {
-        //        List<QuanLyQuanCafe.DTO.Menu> listBillInfo = MenuDAO.Instance.GetListMenuByTable(item.ID);
-        //        foreach (QuanLyQuanCafe.DTO.Menu itemMenu in listBillInfo)
-        //        {
-        //            if (itemFood.Name.Equals(itemMenu.FoodName))
-        //                return true;
-
-        //        }
-        //    }
-        //    return false;
-        //}
-
-
-
-
-        private event EventHandler insertCategory;
-        public event EventHandler InsertCategory
-        {
-            add { insertCategory += value; }
-            remove { insertCategory -= value; }
-        }
-
-        private event EventHandler deleteCategory;
-        public event EventHandler DeleteCategory
-        {
-            add { deleteCategory += value; }
-            remove { deleteCategory -= value; }
-        }
-
-        private event EventHandler updateCategory;
-        public event EventHandler UpdateCategory
-        {
-            add { updateCategory += value; }
-            remove { updateCategory -= value; }
-        }
-
-
-        private void btnShowAccount_Click(object sender, EventArgs e)
-        {
-            LoadListAccount();
-        }
-
-
-        //void AddAccount(string userName, string displayName, int type)
-        //{
-        //    foreach (Account item in accountList)
-        //    {
-        //        if (item.UserName == userName)
-        //        {
-        //            MessageBox.Show("Tên tài khoản đã tồn tại.");
-        //            return;
-        //        }
-        //    }
-        //    if (AccountDAO.Instance.InsertAccount(userName, displayName, type))
-        //    {
-        //        MessageBox.Show("Thêm tài khoản thành công");
-        //    }
-        //    else
-        //    {
-        //        MessageBox.Show("Thêm tài khoản thất bại");
-        //    }
-
-        //    LoadAccount();
-        //}
-
-        //void EditAccount(string userName, string displayName, int type)
-        //{
-        //    if (AccountDAO.Instance.UpdateAccount(userName, displayName, type))
-        //    {
-        //        MessageBox.Show("Sửa tài khoản thành công");
-        //    }
-        //    else
-        //    {
-        //        MessageBox.Show("Sửa tài khoản thất bại");
-        //    }
-
-        //    LoadListAccount();
-        //}
-
+        #endregion
 
         void DeleteAccount(string userName)
         {
@@ -1028,7 +1047,6 @@ namespace QuanLyQuanCafe
 
             LoadListAccount();
         }
-
 
         void ResetPassword(string userName)
         {
@@ -1126,6 +1144,11 @@ namespace QuanLyQuanCafe
             icust.ImageID = "";
             icust.Birthday = DateTime.Now;
             icust.Email = txbEmail.Text;
+        }
+
+        private void btnShowAccount_Click(object sender, EventArgs e)
+        {
+            LoadListAccount();
         }
 
         private void btnAddAccount_Click(object sender, EventArgs e)
@@ -1231,6 +1254,7 @@ namespace QuanLyQuanCafe
                     EditAccList(Convert.ToInt32(txbAccountID.Text));        // chỉnh sửa trong accList
                     ControlItemAccount(isFlagAccount);
                     btnEditAccount.Text = "Sửa";
+                    btnAddAccount.Enabled = true;
                     isFlagAccount = false;
                 }
                 else
@@ -1299,10 +1323,6 @@ namespace QuanLyQuanCafe
 
             ResetPassword(userName);
         }
-
-
-
-
 
     }
 }
