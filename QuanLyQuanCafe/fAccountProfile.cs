@@ -1,4 +1,5 @@
-﻿using IAccountInterface;
+﻿using Facade;
+using IAccountInterface;
 using QuanLyQuanCafe.DAO;
 using QuanLyQuanCafe.DTO;
 using System;
@@ -7,6 +8,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -16,7 +18,7 @@ namespace QuanLyQuanCafe
     public partial class fAccountProfile : Form
     {
         private IAccount loginAccount;
-
+        AccountUiFacade Fac = new AccountUiFacade("AdoAccDAO");
         public IAccount LoginAccount
         {
             get { return loginAccount; }
@@ -30,8 +32,18 @@ namespace QuanLyQuanCafe
 
         void ChangeAccount(IAccount acc)
         {
-            txbUsername.Text = LoginAccount.UserName;
-            txbDisPlayName.Text = LoginAccount.DisplayName;
+            txbAccountID.Text = acc.Id.ToString();
+            txbUsername.Text = acc.UserName;
+            txbDisPlayName.Text = acc.DisplayName;
+            txbPhone.Text = acc.Phone;
+            if (acc.GioiTinh == true)
+                cbGioiTinh.SelectedIndex = 0;
+            else
+                cbGioiTinh.SelectedIndex = 1;
+            dateBirthday.Value = acc.Birthday;
+            txbEmail.Text = acc.Email;
+            txbCMND.Text = acc.CMND;
+            txbAddress.Text = acc.Address;
         }
 
 
@@ -40,32 +52,35 @@ namespace QuanLyQuanCafe
             this.Close();
         }
 
-        void UpdateAcc()
+        bool UpdateAcc()
         {
-            string displayName = txbDisPlayName.Text;
-            string password = txbNewPassword.Text;
-            string newpass = txbNewPassword.Text;
-            string reenterPass = txbReEnterPass.Text;
-            string userName = txbUsername.Text;
-
-            if (!newpass.Equals(reenterPass))
-            {
-                MessageBox.Show("Vui lòng nhập lại mật khẩu đúng với mật khẩu mới!");
-            }
+            IAccount icust = Fac.Get(LoginAccount.Type);
+            icust.Id = Convert.ToInt32(txbAccountID.Text);
+            icust.UserName = txbUsername.Text;
+            icust.DisplayName = txbDisPlayName.Text;
+            
+            //icust.Password = txbNewPassword.Text;
+            //icust.newpass = txbNewPassword.Text;
+            //icust.reenterPass = txbReEnterPass.Text;
+            icust.Phone = txbPhone.Text;
+            if (cbGioiTinh.SelectedIndex == 0)
+                icust.GioiTinh = true;
             else
-            {
-                Account item = AccountDAO.Instance.GetAccountByUserName(userName);
-                if (AccountDAO.Instance.UpdateAccount(item.ID, userName, displayName, password, newpass))
-                {
-                    MessageBox.Show("Cập nhật thành công");
-                    if (updateAccount != null)
-                        updateAccount(this, new AccountEvent(AccountDAO.Instance.GetAccountByUserName(userName)));
-                }
-                else
-                    MessageBox.Show("Đã có sai xót");
-            }
-
+                icust.GioiTinh = false;
+            icust.Birthday = dateBirthday.Value;
+            icust.Email = txbEmail.Text;
+            icust.CMND = txbCMND.Text;
+            icust.Address = txbAddress.Text;
+            icust.Password = LoginAccount.Password;
+            icust.Type = LoginAccount.Type;
+            icust.ImageID = LoginAccount.ImageID;
+            icust.IsUsed = LoginAccount.IsUsed;
+            if (icust.Validate() == false)
+                return false;
+            Fac.Save(icust);
+            return true;
         }
+
 
         private event EventHandler<AccountEvent> updateAccount;
         public event EventHandler<AccountEvent> UpdateAccount
@@ -75,7 +90,66 @@ namespace QuanLyQuanCafe
         }
         private void btnUpdate_Click(object sender, EventArgs e)
         {
-            UpdateAcc();
+            if(UpdateAcc())
+                MessageBox.Show("Cập nhật thông tin thành công!");
+        }
+
+        string ValidatePass()
+        {
+            byte[] temp = ASCIIEncoding.ASCII.GetBytes(txbPassword.Text);
+            byte[] hasData = new MD5CryptoServiceProvider().ComputeHash(temp);
+
+            string hasPass = "";
+            foreach (byte item in hasData)
+            {
+                hasPass += item;
+            }
+            if (!hasPass.Equals(LoginAccount.Password))
+                return "Mật khẩu cũ không chính xác!\n";
+            if (!txbNewPassword.Text.Equals(txbReEnterPass.Text))
+                return "Xác nhận mật khẩu không chinh xác";
+            return string.Empty;
+        }
+        private void btnChangePass_Click(object sender, EventArgs e)
+        {
+            if(string.IsNullOrEmpty(ValidatePass()))
+            {
+                IAccount icust = Fac.Get(LoginAccount.Type);
+                icust.Id = Convert.ToInt32(txbAccountID.Text);
+                icust.UserName = txbUsername.Text;
+                icust.DisplayName = txbDisPlayName.Text;
+
+                byte[] temp = ASCIIEncoding.ASCII.GetBytes(txbNewPassword.Text);
+                byte[] hasData = new MD5CryptoServiceProvider().ComputeHash(temp);
+
+                string hasPass = "";
+                foreach (byte item in hasData)
+                {
+                    hasPass += item;
+                }
+
+                icust.Password = hasPass;
+                //icust.newpass = txbNewPassword.Text;
+                //icust.reenterPass = txbReEnterPass.Text;
+                icust.Phone = txbPhone.Text;
+                if (cbGioiTinh.SelectedIndex == 0)
+                    icust.GioiTinh = true;
+                else
+                    icust.GioiTinh = false;
+                icust.Birthday = dateBirthday.Value;
+                icust.Email = txbEmail.Text;
+                icust.CMND = txbCMND.Text;
+                icust.Address = txbAddress.Text;
+                //icust.Password = LoginAccount.Password;
+                icust.Type = LoginAccount.Type;
+                icust.ImageID = LoginAccount.ImageID;
+                icust.IsUsed = LoginAccount.IsUsed;
+                if (icust.Validate() == false)
+                    return;
+                Fac.Save(icust);
+
+                MessageBox.Show("Đổi mật khẩu thành công!");
+            }
         }
     }
 
