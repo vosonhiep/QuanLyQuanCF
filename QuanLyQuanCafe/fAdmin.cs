@@ -53,7 +53,7 @@ namespace QuanLyQuanCafe
             LoadListTable();
 
             dtgvFood.DataSource = foodList;
-            dtgvAccount.DataSource = acclist;
+            dtgvAccount.DataSource = acclist.Where(x=>x.IsUsed == true).ToList();
             dtgvCategory.DataSource = categoryList;
             dtgvTable.DataSource = tableList;
 
@@ -88,23 +88,27 @@ namespace QuanLyQuanCafe
             txbCMND.DataBindings.Add(new Binding("Text", dtgvAccount.DataSource, "CMND", true, DataSourceUpdateMode.Never));
             txbEmail.DataBindings.Add(new Binding("Text", dtgvAccount.DataSource, "Email", true, DataSourceUpdateMode.Never));         
         }
-        // Biding GioiTinh, binding Type, binding GioiTinh
 
+        // Biding GioiTinh, binding Type, binding GioiTinh
         private void txbAccountUsername_TextChanged(object sender, EventArgs e)
         {
-            IAccount itemp = acclist.Where(x => x.Id == Convert.ToInt32(txbAccountID.Text)).SingleOrDefault();
+            if(isFlagAccount == false)
+            {
+                IAccount itemp = acclist.Where(x => x.Id == Convert.ToInt32(txbAccountID.Text)).SingleOrDefault();
 
-            if (itemp.GioiTinh == true)
-                cbGioiTinh.SelectedIndex = 0;
-            else
-                cbGioiTinh.SelectedIndex = 1;
+                if (itemp.GioiTinh == true)
+                    cbGioiTinh.SelectedIndex = 0;
+                else
+                    cbGioiTinh.SelectedIndex = 1;
 
-            if (itemp.Type.Equals("Admin"))
-                cbAccountType.SelectedIndex = 0;
-            else if (itemp.Type.Equals("Cashier"))
-                cbAccountType.SelectedIndex = 1;
-            else
-                cbAccountType.SelectedIndex = 2;
+                if (itemp.Type.Equals("Admin"))
+                    cbAccountType.SelectedIndex = 0;
+                else if (itemp.Type.Equals("Cashier"))
+                    cbAccountType.SelectedIndex = 1;
+                else
+                    cbAccountType.SelectedIndex = 2;
+            }
+            
         }
 
         void AddFoodBinding()
@@ -113,7 +117,6 @@ namespace QuanLyQuanCafe
             txbFoodID.DataBindings.Add(new Binding("Text", dtgvFood.DataSource, "ID", true, DataSourceUpdateMode.Never));
             nmFoodPrice.DataBindings.Add(new Binding("Value", dtgvFood.DataSource, "Price", true, DataSourceUpdateMode.Never));
 
-            
         }
         void AddCategoryBinding()
         {
@@ -201,7 +204,7 @@ namespace QuanLyQuanCafe
 
         void LoadListAccount()
         {
-            acclist = Fac.GetAccounts("select * from Account where IsUsed = 'true'");
+            acclist = Fac.GetAccounts("select * from Account");
         }
 
         void LoadListFood()
@@ -239,6 +242,7 @@ namespace QuanLyQuanCafe
             dtgvAccount.Columns["ImageId"].Visible = false;
             dtgvAccount.Columns["IsUsed"].Visible = false;
             dtgvAccount.Columns["ValidationType"].Visible = false;
+            dtgvAccount.Columns["GioiTinh"].Visible = false;
         }
 
         void HiddenColumnsFood()
@@ -1132,7 +1136,7 @@ namespace QuanLyQuanCafe
             icust.Id = Convert.ToInt32(txbAccountID.Text);
             icust.UserName = txbAccountUsername.Text;
             icust.DisplayName = txbDisplayName.Text;
-            icust.Password = "1";
+            icust.Password = "1962026656160185351301320480154111117132155";
             icust.IsUsed = true;
             icust.Phone = txbPhone.Text;
             if (cbGioiTinh.SelectedIndex == 1)
@@ -1149,8 +1153,13 @@ namespace QuanLyQuanCafe
         private void btnShowAccount_Click(object sender, EventArgs e)
         {
             LoadListAccount();
+            HiddenColumnsAccount();
         }
 
+        bool IsExistUsername(string Username)
+        {
+            return acclist.Where(x => x.UserName == Username).Count() > 0;
+        }
         private void btnAddAccount_Click(object sender, EventArgs e)
         {
             if (isFlagAccount == false)
@@ -1168,7 +1177,12 @@ namespace QuanLyQuanCafe
                 var rs = MessageBox.Show("Bạn muốn thêm tài khoản mới?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (rs == DialogResult.Yes)
                 {
-                    //icust = Factory<IAccount>.Create(cbAccountType.Text);
+                    if (IsExistUsername(txbAccountUsername.Text))
+                    {
+                        MessageBox.Show("Tên tài khoản đã tồn tại!");
+                        return;
+                    }
+
                     icust = Fac.Get(cbAccountType.Text);
                     GetDataFromUI(icust);
                     if (icust.Validate() == false)
@@ -1191,6 +1205,7 @@ namespace QuanLyQuanCafe
                 }
             }
             dtgvAccount.DataSource = acclist;
+            HiddenColumnsAccount();
         }
 
         bool IsAccountUsing(int id, string username)
@@ -1202,15 +1217,17 @@ namespace QuanLyQuanCafe
 
         private void btnDeleteAccount_Click(object sender, EventArgs e)
         {
+            if(IsAccountUsing(Convert.ToInt32(txbAccountID.Text), txbAccountUsername.Text))
+            {
+                MessageBox.Show("Không thể xóa tài khoản đang sử dụng!");
+                return;
+            }
             var rs = MessageBox.Show("Bạn muốn xóa tài khoản?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (rs == DialogResult.Yes)
             {
-                //icust = Factory<IAccount>.Create(cbAccountType.Text);
                 icust = Fac.Get(cbAccountType.Text);
                 GetDataFromUI(icust);
                 icust.IsUsed = false;                   // Đổi cột IsUsed thành false
-                //if (icust.Validate() == false)
-                //    return;
                 Fac.Save(icust);
                 dtgvAccount.DataSource = null;          // reset datasource datagridview
                 acclist.Remove(acclist.Where(x=>x.Id == icust.Id).SingleOrDefault());                  // xóa khỏi danh sách 
@@ -1228,6 +1245,9 @@ namespace QuanLyQuanCafe
                 item.GioiTinh = true;
             else
                 item.GioiTinh = false;
+            item.CMND = txbCMND.Text;
+            item.Email = txbEmail.Text;
+            item.Address = txbAddress.Text;
         }
 
         private void btnEditAccount_Click(object sender, EventArgs e)
@@ -1267,6 +1287,7 @@ namespace QuanLyQuanCafe
                 }
             }
             dtgvAccount.DataSource = acclist;
+            HiddenColumnsAccount();
         }
         private bool CheckDataEmptyAccount()
         {
@@ -1319,9 +1340,15 @@ namespace QuanLyQuanCafe
 
         private void btnResetPassword_Click(object sender, EventArgs e)
         {
-            string userName = txbAccountUsername.Text;
+            icust = Fac.Get(cbAccountType.Text);
+            GetDataFromUI(icust);
+            if (icust.Validate() == false)
+                return;
+            icust.Password = "1962026656160185351301320480154111117132155";
+            Fac.Save(icust);
+            //dtgvAccount.DataSource = null;                          // reset datasource datagridview
+            EditAccList(Convert.ToInt32(txbAccountID.Text));        // chỉnh sửa trong accList
 
-            ResetPassword(userName);
         }
 
     }

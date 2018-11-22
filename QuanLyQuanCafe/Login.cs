@@ -8,6 +8,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -34,8 +35,16 @@ namespace QuanLyQuanCafe
 
         public bool Login(string userName, string passWord)
         {
-            //return Fac.GetAccounts(string.Format("select * from Account where Username = N'{0}' and IsUsed = 'true'", userName));
-            listAcc = Fac.GetAccounts("select * from Account where IsUsed = 'true'");
+            byte[] temp = ASCIIEncoding.ASCII.GetBytes(passWord);
+            byte[] hasData = new MD5CryptoServiceProvider().ComputeHash(temp);
+
+            string hasPass = "";
+            foreach (byte item in hasData)
+            {
+                hasPass += item;
+            }
+
+            listAcc = Fac.GetAccounts(string.Format("Exec USP_Login @userName = N'{0}' , @passWord = N'{1}'",userName, hasPass));
            return listAcc.Where(x => x.UserName == userName).SingleOrDefault() != null ? true : false;
         }
 

@@ -19,13 +19,14 @@ namespace QuanLyQuanCafe
     {
         private IAccount loginAccount;
         List<Table> tableList = null;
+        List<Button> btnList = new List<Button>();
         public IAccount LoginAccount
         {
             get { return loginAccount; }
             set 
             {
                 loginAccount = value;
-                //ChangeAccount(loginAccount);
+                ChangeAccount(loginAccount.Type);
             }
         }
         public fTableManager(IAccount acc)
@@ -43,8 +44,11 @@ namespace QuanLyQuanCafe
 
         void ChangeAccount(string type)
         {
-            adminToolStripMenuItem.Enabled = type == "Admin";
-            thToolStripMenuItem.Text += " (" + loginAccount.DisplayName + ")";
+            if (type.Equals("Admin"))
+            {
+                //pnStaff.Enabled = false;
+
+            }
         }
 
         void LoadCategory()
@@ -74,7 +78,7 @@ namespace QuanLyQuanCafe
                 btn.Text = item.Name + Environment.NewLine + item.Status;
                 btn.Click += btn_Click;
                 btn.Tag = item;
-
+                btn.Name = "btn" + item.ID;         // name của btn = "btn" + Name(table)
                 switch (item.Status)
                 {
                     case "Trống":
@@ -84,8 +88,26 @@ namespace QuanLyQuanCafe
                         btn.BackColor = Color.LightPink;
                         break;
                 }
-
+                btnList.Add(btn);
                 flpTable.Controls.Add(btn);
+            }
+        }
+
+        /// <summary>
+        /// Sau khi thêm món hoặc thanh toán hóa đơn thì chỉ load lại table nào cần load
+        /// </summary>
+        void LoadTableId(int idTable)
+        {
+            Table item = tableList.Where(x => x.ID == idTable).SingleOrDefault();
+            Button btn = btnList.Where(x => x.Name == ("btn" + item.ID)).SingleOrDefault();
+            switch (item.Status)
+            {
+                case "Trống":
+                    btn.BackColor = Color.Aqua;
+                    break;
+                default:
+                    btn.BackColor = Color.LightPink;
+                    break;
             }
         }
 
@@ -234,6 +256,12 @@ namespace QuanLyQuanCafe
             LoadFoodListByCategoryID(id);
         }
 
+        void UpdadteListTable(int idTable, string status)
+        {
+            Table item = tableList.Where(x => x.ID == idTable).SingleOrDefault();
+            item.Status = status;
+        }
+
         private void btnAddFood_Click(object sender, EventArgs e)
         {
             Table table = lsvBill.Tag as Table;
@@ -256,10 +284,10 @@ namespace QuanLyQuanCafe
             {
                 BillInfoDAO.Instance.InsertBillInfo(idBill, foodID, count);
             }
-
+            UpdadteListTable(table.ID, "Có người");
             ShowBill(table.ID);
-
-            LoadTable();
+            LoadTableId(table.ID);
+            //LoadTable();
         }
         private void btnCheckOut_Click(object sender, EventArgs e)
         {
@@ -277,9 +305,10 @@ namespace QuanLyQuanCafe
                 if (MessageBox.Show(string.Format("Bạn có chắc thanh toán hóa đơn cho bàn {0}\nTổng tiền - (Tổng tiền / 100) x Giảm giá\n=> {1} - ({1} / 100) x {2} = {3}", table.Name, totalPrice, discount, finalTotalPrice), "Thông báo", MessageBoxButtons.OKCancel) == System.Windows.Forms.DialogResult.OK)
                 {
                     BillDAO.Instance.CheckOut(idBill, discount, (float)finalTotalPrice);
+                    UpdadteListTable(table.ID, "Trống");
                     ShowBill(table.ID);
-
-                    LoadTable();
+                    LoadTableId(table.ID);
+                    //LoadTable();
                 }
             }
         }
