@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(fAccountProfile));
             this.panel2 = new System.Windows.Forms.Panel();
             this.txbUsername = new System.Windows.Forms.TextBox();
             this.lbTenDangNhap = new System.Windows.Forms.Label();
@@ -67,6 +68,7 @@
             this.dateBirthday = new System.Windows.Forms.DateTimePicker();
             this.label10 = new System.Windows.Forms.Label();
             this.btnChangePass = new System.Windows.Forms.Button();
+            this.label5 = new System.Windows.Forms.Label();
             this.panel2.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -85,7 +87,7 @@
             // 
             this.panel2.Controls.Add(this.txbUsername);
             this.panel2.Controls.Add(this.lbTenDangNhap);
-            this.panel2.Location = new System.Drawing.Point(36, 63);
+            this.panel2.Location = new System.Drawing.Point(41, 108);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(265, 27);
             this.panel2.TabIndex = 1;
@@ -112,7 +114,7 @@
             // 
             this.panel1.Controls.Add(this.txbDisPlayName);
             this.panel1.Controls.Add(this.label1);
-            this.panel1.Location = new System.Drawing.Point(36, 92);
+            this.panel1.Location = new System.Drawing.Point(41, 137);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(265, 27);
             this.panel1.TabIndex = 2;
@@ -138,7 +140,7 @@
             // 
             this.panel3.Controls.Add(this.txbPassword);
             this.panel3.Controls.Add(this.label2);
-            this.panel3.Location = new System.Drawing.Point(181, 256);
+            this.panel3.Location = new System.Drawing.Point(186, 301);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(265, 27);
             this.panel3.TabIndex = 3;
@@ -166,7 +168,7 @@
             // 
             this.panel4.Controls.Add(this.txbNewPassword);
             this.panel4.Controls.Add(this.label3);
-            this.panel4.Location = new System.Drawing.Point(181, 289);
+            this.panel4.Location = new System.Drawing.Point(186, 334);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(265, 27);
             this.panel4.TabIndex = 4;
@@ -194,7 +196,7 @@
             // 
             this.panel5.Controls.Add(this.txbReEnterPass);
             this.panel5.Controls.Add(this.label4);
-            this.panel5.Location = new System.Drawing.Point(181, 322);
+            this.panel5.Location = new System.Drawing.Point(186, 367);
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(265, 27);
             this.panel5.TabIndex = 5;
@@ -220,9 +222,9 @@
             // 
             // btnUpdate
             // 
-            this.btnUpdate.Location = new System.Drawing.Point(226, 192);
+            this.btnUpdate.Location = new System.Drawing.Point(231, 237);
             this.btnUpdate.Name = "btnUpdate";
-            this.btnUpdate.Size = new System.Drawing.Size(75, 23);
+            this.btnUpdate.Size = new System.Drawing.Size(65, 35);
             this.btnUpdate.TabIndex = 6;
             this.btnUpdate.Text = "Cập nhập";
             this.btnUpdate.UseVisualStyleBackColor = true;
@@ -231,9 +233,9 @@
             // btnExit
             // 
             this.btnExit.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnExit.Location = new System.Drawing.Point(307, 192);
+            this.btnExit.Location = new System.Drawing.Point(312, 237);
             this.btnExit.Name = "btnExit";
-            this.btnExit.Size = new System.Drawing.Size(75, 23);
+            this.btnExit.Size = new System.Drawing.Size(65, 35);
             this.btnExit.TabIndex = 7;
             this.btnExit.Text = "Thoát";
             this.btnExit.UseVisualStyleBackColor = true;
@@ -243,7 +245,7 @@
             // 
             this.panel25.Controls.Add(this.txbEmail);
             this.panel25.Controls.Add(this.label17);
-            this.panel25.Location = new System.Drawing.Point(36, 122);
+            this.panel25.Location = new System.Drawing.Point(41, 167);
             this.panel25.Name = "panel25";
             this.panel25.Size = new System.Drawing.Size(265, 29);
             this.panel25.TabIndex = 20;
@@ -269,7 +271,7 @@
             // 
             this.panel20.Controls.Add(this.txbCMND);
             this.panel20.Controls.Add(this.label16);
-            this.panel20.Location = new System.Drawing.Point(319, 92);
+            this.panel20.Location = new System.Drawing.Point(324, 137);
             this.panel20.Name = "panel20";
             this.panel20.Size = new System.Drawing.Size(281, 27);
             this.panel20.TabIndex = 19;
@@ -295,7 +297,7 @@
             // 
             this.panel18.Controls.Add(this.txbAddress);
             this.panel18.Controls.Add(this.label15);
-            this.panel18.Location = new System.Drawing.Point(319, 122);
+            this.panel18.Location = new System.Drawing.Point(324, 167);
             this.panel18.Name = "panel18";
             this.panel18.Size = new System.Drawing.Size(281, 64);
             this.panel18.TabIndex = 18;
@@ -322,7 +324,7 @@
             // 
             this.panel6.Controls.Add(this.cbGioiTinh);
             this.panel6.Controls.Add(this.label14);
-            this.panel6.Location = new System.Drawing.Point(319, 62);
+            this.panel6.Location = new System.Drawing.Point(324, 107);
             this.panel6.Name = "panel6";
             this.panel6.Size = new System.Drawing.Size(281, 27);
             this.panel6.TabIndex = 17;
@@ -352,7 +354,7 @@
             // 
             this.panel7.Controls.Add(this.txbPhone);
             this.panel7.Controls.Add(this.label9);
-            this.panel7.Location = new System.Drawing.Point(319, 32);
+            this.panel7.Location = new System.Drawing.Point(324, 77);
             this.panel7.Name = "panel7";
             this.panel7.Size = new System.Drawing.Size(281, 27);
             this.panel7.TabIndex = 16;
@@ -378,7 +380,7 @@
             // 
             this.panel8.Controls.Add(this.txbAccountID);
             this.panel8.Controls.Add(this.label13);
-            this.panel8.Location = new System.Drawing.Point(36, 32);
+            this.panel8.Location = new System.Drawing.Point(41, 77);
             this.panel8.Name = "panel8";
             this.panel8.Size = new System.Drawing.Size(265, 27);
             this.panel8.TabIndex = 15;
@@ -405,7 +407,7 @@
             // 
             this.pnType.Controls.Add(this.dateBirthday);
             this.pnType.Controls.Add(this.label10);
-            this.pnType.Location = new System.Drawing.Point(36, 155);
+            this.pnType.Location = new System.Drawing.Point(41, 200);
             this.pnType.Name = "pnType";
             this.pnType.Size = new System.Drawing.Size(265, 31);
             this.pnType.TabIndex = 14;
@@ -433,21 +435,35 @@
             // btnChangePass
             // 
             this.btnChangePass.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnChangePass.Location = new System.Drawing.Point(274, 376);
+            this.btnChangePass.Location = new System.Drawing.Point(268, 412);
             this.btnChangePass.Name = "btnChangePass";
-            this.btnChangePass.Size = new System.Drawing.Size(75, 23);
+            this.btnChangePass.Size = new System.Drawing.Size(65, 35);
             this.btnChangePass.TabIndex = 21;
             this.btnChangePass.Text = "Đổi mật khẩu";
             this.btnChangePass.UseVisualStyleBackColor = true;
             this.btnChangePass.Click += new System.EventHandler(this.btnChangePass_Click);
+            // 
+            // label5
+            // 
+            this.label5.BackColor = System.Drawing.Color.Blue;
+            this.label5.Font = new System.Drawing.Font("Arial", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.ForeColor = System.Drawing.Color.White;
+            this.label5.Location = new System.Drawing.Point(0, 0);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(664, 42);
+            this.label5.TabIndex = 22;
+            this.label5.Text = "Thông tin cá nhân";
+            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // fAccountProfile
             // 
             this.AcceptButton = this.btnUpdate;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.CancelButton = this.btnExit;
             this.ClientSize = new System.Drawing.Size(665, 504);
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.btnChangePass);
             this.Controls.Add(this.panel25);
             this.Controls.Add(this.panel20);
@@ -463,9 +479,10 @@
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.panel2);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "fAccountProfile";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Thông tin cá nhân";
+            this.Text = "Quản lý quán cafe";
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.panel1.ResumeLayout(false);
@@ -534,5 +551,6 @@
         private System.Windows.Forms.Button btnChangePass;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.DateTimePicker dateBirthday;
+        private System.Windows.Forms.Label label5;
     }
 }

@@ -20,6 +20,7 @@ namespace QuanLyQuanCafe
         private IAccount loginAccount;
         List<Table> tableList = null;
         List<Button> btnList = new List<Button>();
+        private bool isTextChanged = true;
         public IAccount LoginAccount
         {
             get { return loginAccount; }
@@ -46,8 +47,19 @@ namespace QuanLyQuanCafe
         {
             if (type.Equals("Admin"))
             {
-                //pnStaff.Enabled = false;
-
+                btnAddFood.Enabled = false;
+                btnSwitchTable.Enabled = false;
+                btnCheckOut.Enabled = false;
+            }
+            else if (type.Equals("Staff"))
+            {
+                adminToolStripMenuItem.Visible = false;
+                btnCheckOut.Enabled = false;
+            }
+            else
+            {
+                adminToolStripMenuItem.Visible = false;
+                btnAddFood.Enabled = false;
             }
         }
 
@@ -78,14 +90,16 @@ namespace QuanLyQuanCafe
                 btn.Text = item.Name + Environment.NewLine + item.Status;
                 btn.Click += btn_Click;
                 btn.Tag = item;
+                btn.ForeColor = Color.White;
+                btn.Font = new Font("Segoe UI", 12, FontStyle.Bold);
                 btn.Name = "btn" + item.ID;         // name của btn = "btn" + Name(table)
                 switch (item.Status)
                 {
                     case "Trống":
-                        btn.BackColor = Color.Aqua;
+                        btn.BackColor = Color.LimeGreen;
                         break;
                     default:
-                        btn.BackColor = Color.LightPink;
+                        btn.BackColor = Color.DodgerBlue;
                         break;
                 }
                 btnList.Add(btn);
@@ -103,10 +117,10 @@ namespace QuanLyQuanCafe
             switch (item.Status)
             {
                 case "Trống":
-                    btn.BackColor = Color.Aqua;
+                    btn.BackColor = Color.LimeGreen;
                     break;
                 default:
-                    btn.BackColor = Color.LightPink;
+                    btn.BackColor = Color.DodgerBlue;
                     break;
             }
         }
@@ -125,11 +139,11 @@ namespace QuanLyQuanCafe
                 totalPrice += item.TotalPrice;
                 lsvBill.Items.Add(lsvItem);
             }
-            CultureInfo culture = new CultureInfo("vi-VN");
+            //CultureInfo culture = new CultureInfo("vi-VN");
 
             //Thread.CurrentThread.CurrentCulture = culture;
 
-            txtTotalPrice.Text = totalPrice.ToString("c", culture);
+            txtTotalPrice.Text = totalPrice.ToString();
 
         }
 
@@ -336,6 +350,39 @@ namespace QuanLyQuanCafe
         private void thêmMónĂnToolStripMenuItem_Click(object sender, EventArgs e)
         {
             btnAddFood_Click(this, new EventArgs());
+        }
+
+        private void txtTotalPrice_TextChanged(object sender, EventArgs e)
+        {
+            
+                txtTotalPrice.Text = txtTotalPrice.Text.Replace(" ", "");
+                String temp = txtTotalPrice.Text;
+
+                if (temp.Length == 0)
+                {
+                    return;
+                }
+
+                if (temp.Length <= 4)
+                {
+                    temp = temp.Replace(",", "");
+                }
+
+                if (temp.Length > 3 && isTextChanged)
+                {
+                    temp = String.Format("{0:0,000}", Double.Parse(temp));
+                    isTextChanged = false;
+                    txtTotalPrice.Text = temp;
+                }
+                else
+                {
+                    txtTotalPrice.Text = temp;
+                    isTextChanged = true;
+                }
+
+                txtTotalPrice.SelectionStart = txtTotalPrice.Text.Length;
+            
+            
         }
 
 

@@ -75,6 +75,36 @@ namespace QuanLyQuanCafe
             WidthColumnsCategory();
             WidthColumnsFood();
 
+            FormatDatagridview();
+            
+        }
+
+        void FormatDatagridview()
+        {
+            dtgvFood.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 10, FontStyle.Bold);
+            dtgvFood.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+            dtgvFood.EnableHeadersVisualStyles = false;
+            dtgvFood.ColumnHeadersDefaultCellStyle.BackColor = Color.Blue;
+
+            dtgvCategory.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 10, FontStyle.Bold);
+            dtgvCategory.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+            dtgvCategory.EnableHeadersVisualStyles = false;
+            dtgvCategory.ColumnHeadersDefaultCellStyle.BackColor = Color.Blue;
+
+            dtgvTable.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 10, FontStyle.Bold);
+            dtgvTable.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+            dtgvTable.EnableHeadersVisualStyles = false;
+            dtgvTable.ColumnHeadersDefaultCellStyle.BackColor = Color.Blue;
+
+            dtgvAccount.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 10, FontStyle.Bold);
+            dtgvAccount.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+            dtgvAccount.EnableHeadersVisualStyles = false;
+            dtgvAccount.ColumnHeadersDefaultCellStyle.BackColor = Color.Blue;
+
+            dtgvBill.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 10, FontStyle.Bold);
+            dtgvBill.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+            dtgvBill.EnableHeadersVisualStyles = false;
+            dtgvBill.ColumnHeadersDefaultCellStyle.BackColor = Color.Blue;
         }
 
         #region Binding

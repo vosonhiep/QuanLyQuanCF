@@ -12,7 +12,7 @@ namespace QuanLyQuanCafe.DAO
     {
         private static DataProvider instance;
         // Chuỗi kết nối
-        private string connectionSTR = @"Data Source=DESKTOP-ME1AATN\SQL;Initial Catalog=QuanLyQuanCafe;Integrated Security=True";
+        private string connectionSTR = @"Data Source=DESKTOP-ME1AATN\SQL;Initial Catalog=QuanLyQuanCafe2;Integrated Security=True";
 
         public static DataProvider Instance
         {

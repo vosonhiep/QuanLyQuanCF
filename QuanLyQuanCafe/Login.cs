@@ -66,10 +66,5 @@ namespace QuanLyQuanCafe
                 MessageBox.Show("Sai tên tài khoản hoặc mật khẩu!");
             }
         }
-
-        private void btnExit_Click(object sender, EventArgs e)
-        {
-            Application.Exit();
-        }
     }
 }

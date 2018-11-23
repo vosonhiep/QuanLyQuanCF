@@ -18,7 +18,7 @@ namespace AdoDAO
         void Open()
         {
 
-            objConnection = new SqlConnection(@"Data Source=DESKTOP-ME1AATN\SQL;Initial Catalog=QuanLyQuanCafe;Integrated Security=True");
+            objConnection = new SqlConnection(@"Data Source=DESKTOP-ME1AATN\SQL;Initial Catalog=QuanLyQuanCafe2;Integrated Security=True");
             objConnection.Open();
             objCommand = new SqlCommand();
             objCommand.Connection = objConnection;

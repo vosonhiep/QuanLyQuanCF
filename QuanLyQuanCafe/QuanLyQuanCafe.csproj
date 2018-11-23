@@ -100,17 +100,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
@@ -148,6 +149,72 @@
       <Project>{d6abcb08-b9f3-4754-8586-01dd704d4ab5}</Project>
       <Name>IDAO</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\login_blue_key.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\login_blue_user.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cafe-Organo-gold-30-1.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\avater_user.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\mo-quan-ca-phe-can-bao-nhieu-von-2.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\mo-quan-ca-phe-can-bao-nhieu-von-21.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\coins.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\addnew.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\admin.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\advancedsettings.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ic_arrow_round_change.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\capnhat.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\control_double_stop_left.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\control_stop_left.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\control_stop_right.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\control_double_stop_right.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\file - add.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\file - add1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\file - delete1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\file -edit1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\file - refresh1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\system_search.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
