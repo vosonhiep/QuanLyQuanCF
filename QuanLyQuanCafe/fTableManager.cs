@@ -47,19 +47,22 @@ namespace QuanLyQuanCafe
         {
             if (type.Equals("Admin"))
             {
-                btnAddFood.Enabled = false;
-                btnSwitchTable.Enabled = false;
-                btnCheckOut.Enabled = false;
+                //btnAddFood.Enabled = false;
+                //btnSwitchTable.Enabled = false;
+                //btnCheckOut.Enabled = false;
+                pnAdmin_Cashier.Visible = true;
             }
             else if (type.Equals("Staff"))
             {
-                adminToolStripMenuItem.Visible = false;
-                btnCheckOut.Enabled = false;
+                //adminToolStripMenuItem.Visible = false;
+                //btnCheckOut.Enabled = false;
+                pnStaff.Visible = true;
             }
             else
             {
-                adminToolStripMenuItem.Visible = false;
-                btnAddFood.Enabled = false;
+                //adminToolStripMenuItem.Visible = false;
+                //btnAddFood.Enabled = false;
+                pnAdmin_Cashier.Visible = true;
             }
         }
 
@@ -165,6 +168,8 @@ namespace QuanLyQuanCafe
         }
         private void đăngXuấtToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            pnAdmin_Cashier.Visible = false;
+            pnStaff.Visible = false;
             this.Close();
         }
 

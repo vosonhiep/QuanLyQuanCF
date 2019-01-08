@@ -1344,7 +1344,7 @@
             // textBox1
             // 
             this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.Location = new System.Drawing.Point(508, 20);
+            this.textBox1.Location = new System.Drawing.Point(510, 12);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(133, 24);
             this.textBox1.TabIndex = 2;
@@ -1353,7 +1353,7 @@
             // 
             this.button1.Image = global::QuanLyQuanCafe.Properties.Resources.system_search;
             this.button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button1.Location = new System.Drawing.Point(647, 20);
+            this.button1.Location = new System.Drawing.Point(649, 12);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(60, 26);
             this.button1.TabIndex = 1;
@@ -1364,10 +1364,10 @@
             // dtgvAccount
             // 
             this.dtgvAccount.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dtgvAccount.Location = new System.Drawing.Point(3, 52);
+            this.dtgvAccount.Location = new System.Drawing.Point(3, 42);
             this.dtgvAccount.Name = "dtgvAccount";
             this.dtgvAccount.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dtgvAccount.Size = new System.Drawing.Size(704, 190);
+            this.dtgvAccount.Size = new System.Drawing.Size(704, 183);
             this.dtgvAccount.TabIndex = 0;
             // 
             // fAdmin

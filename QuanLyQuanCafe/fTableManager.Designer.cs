@@ -37,7 +37,7 @@
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.panel3 = new System.Windows.Forms.Panel();
+            this.pnAdmin_Cashier = new System.Windows.Forms.Panel();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.txtTotalPrice = new System.Windows.Forms.TextBox();
@@ -63,7 +63,7 @@
             this.thêmMónĂnToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
-            this.panel3.SuspendLayout();
+            this.pnAdmin_Cashier.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nmDiscount)).BeginInit();
             this.pnStaff.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nmFoodCount)).BeginInit();
@@ -93,7 +93,7 @@
             this.panel2.Controls.Add(this.lsvBill);
             this.panel2.Location = new System.Drawing.Point(491, 117);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(362, 287);
+            this.panel2.Size = new System.Drawing.Size(362, 353);
             this.panel2.TabIndex = 2;
             // 
             // lsvBill
@@ -106,7 +106,7 @@
             this.lsvBill.GridLines = true;
             this.lsvBill.Location = new System.Drawing.Point(3, 16);
             this.lsvBill.Name = "lsvBill";
-            this.lsvBill.Size = new System.Drawing.Size(359, 268);
+            this.lsvBill.Size = new System.Drawing.Size(359, 334);
             this.lsvBill.TabIndex = 0;
             this.lsvBill.UseCompatibleStateImageBehavior = false;
             this.lsvBill.View = System.Windows.Forms.View.Details;
@@ -133,24 +133,25 @@
             this.columnHeader4.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.columnHeader4.Width = 135;
             // 
-            // panel3
+            // pnAdmin_Cashier
             // 
-            this.panel3.Controls.Add(this.label5);
-            this.panel3.Controls.Add(this.label4);
-            this.panel3.Controls.Add(this.txtTotalPrice);
-            this.panel3.Controls.Add(this.cbSwitchTable);
-            this.panel3.Controls.Add(this.btnSwitchTable);
-            this.panel3.Controls.Add(this.nmDiscount);
-            this.panel3.Controls.Add(this.btnCheckOut);
-            this.panel3.Location = new System.Drawing.Point(491, 407);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(362, 63);
-            this.panel3.TabIndex = 3;
+            this.pnAdmin_Cashier.Controls.Add(this.label5);
+            this.pnAdmin_Cashier.Controls.Add(this.label4);
+            this.pnAdmin_Cashier.Controls.Add(this.txtTotalPrice);
+            this.pnAdmin_Cashier.Controls.Add(this.cbSwitchTable);
+            this.pnAdmin_Cashier.Controls.Add(this.btnSwitchTable);
+            this.pnAdmin_Cashier.Controls.Add(this.nmDiscount);
+            this.pnAdmin_Cashier.Controls.Add(this.btnCheckOut);
+            this.pnAdmin_Cashier.Location = new System.Drawing.Point(492, 28);
+            this.pnAdmin_Cashier.Name = "pnAdmin_Cashier";
+            this.pnAdmin_Cashier.Size = new System.Drawing.Size(355, 86);
+            this.pnAdmin_Cashier.TabIndex = 3;
+            this.pnAdmin_Cashier.Visible = false;
             // 
             // label5
             // 
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(183, 0);
+            this.label5.Location = new System.Drawing.Point(190, 18);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(78, 27);
             this.label5.TabIndex = 10;
@@ -160,7 +161,7 @@
             // label4
             // 
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(99, 3);
+            this.label4.Location = new System.Drawing.Point(98, 16);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(70, 27);
             this.label4.TabIndex = 9;
@@ -171,18 +172,19 @@
             // 
             this.txtTotalPrice.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtTotalPrice.ForeColor = System.Drawing.Color.Red;
-            this.txtTotalPrice.Location = new System.Drawing.Point(176, 29);
+            this.txtTotalPrice.Location = new System.Drawing.Point(175, 51);
             this.txtTotalPrice.Name = "txtTotalPrice";
             this.txtTotalPrice.ReadOnly = true;
             this.txtTotalPrice.Size = new System.Drawing.Size(94, 26);
             this.txtTotalPrice.TabIndex = 8;
+            this.txtTotalPrice.Text = "0";
             this.txtTotalPrice.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txtTotalPrice.TextChanged += new System.EventHandler(this.txtTotalPrice_TextChanged);
             // 
             // cbSwitchTable
             // 
             this.cbSwitchTable.FormattingEnabled = true;
-            this.cbSwitchTable.Location = new System.Drawing.Point(3, 33);
+            this.cbSwitchTable.Location = new System.Drawing.Point(2, 55);
             this.cbSwitchTable.Name = "cbSwitchTable";
             this.cbSwitchTable.Size = new System.Drawing.Size(93, 21);
             this.cbSwitchTable.TabIndex = 7;
@@ -191,7 +193,7 @@
             // 
             this.btnSwitchTable.Image = global::QuanLyQuanCafe.Properties.Resources.capnhat;
             this.btnSwitchTable.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSwitchTable.Location = new System.Drawing.Point(3, 3);
+            this.btnSwitchTable.Location = new System.Drawing.Point(3, 16);
             this.btnSwitchTable.Name = "btnSwitchTable";
             this.btnSwitchTable.Size = new System.Drawing.Size(93, 30);
             this.btnSwitchTable.TabIndex = 6;
@@ -202,7 +204,7 @@
             // 
             // nmDiscount
             // 
-            this.nmDiscount.Location = new System.Drawing.Point(102, 33);
+            this.nmDiscount.Location = new System.Drawing.Point(101, 55);
             this.nmDiscount.Name = "nmDiscount";
             this.nmDiscount.Size = new System.Drawing.Size(60, 20);
             this.nmDiscount.TabIndex = 5;
@@ -214,7 +216,7 @@
             this.btnCheckOut.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCheckOut.ForeColor = System.Drawing.Color.White;
             this.btnCheckOut.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnCheckOut.Location = new System.Drawing.Point(281, 12);
+            this.btnCheckOut.Location = new System.Drawing.Point(280, 34);
             this.btnCheckOut.Name = "btnCheckOut";
             this.btnCheckOut.Size = new System.Drawing.Size(75, 43);
             this.btnCheckOut.TabIndex = 3;
@@ -235,6 +237,7 @@
             this.pnStaff.Name = "pnStaff";
             this.pnStaff.Size = new System.Drawing.Size(358, 86);
             this.pnStaff.TabIndex = 4;
+            this.pnStaff.Visible = false;
             // 
             // btnAddFood
             // 
@@ -395,8 +398,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.ClientSize = new System.Drawing.Size(865, 482);
+            this.Controls.Add(this.pnAdmin_Cashier);
             this.Controls.Add(this.pnStaff);
-            this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.menuStrip1);
@@ -407,8 +410,8 @@
             this.Text = "Phần mềm quản lý quán cafe";
             this.panel1.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
-            this.panel3.ResumeLayout(false);
-            this.panel3.PerformLayout();
+            this.pnAdmin_Cashier.ResumeLayout(false);
+            this.pnAdmin_Cashier.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nmDiscount)).EndInit();
             this.pnStaff.ResumeLayout(false);
             this.pnStaff.PerformLayout();
@@ -426,7 +429,7 @@
         private System.Windows.Forms.FlowLayoutPanel flpTable;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.ListView lsvBill;
-        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Panel pnAdmin_Cashier;
         private System.Windows.Forms.ComboBox cbSwitchTable;
         private System.Windows.Forms.Button btnSwitchTable;
         private System.Windows.Forms.NumericUpDown nmDiscount;

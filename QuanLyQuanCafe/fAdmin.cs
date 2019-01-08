@@ -1164,6 +1164,7 @@ namespace QuanLyQuanCafe
         void GetDataFromUI(IAccount icust)
         {
             icust.Id = Convert.ToInt32(txbAccountID.Text);
+            //icust.Id = Convert.ToInt32(acclist.Max(x => x.Id).ToString()) + 1;
             icust.UserName = txbAccountUsername.Text;
             icust.DisplayName = txbDisplayName.Text;
             icust.Password = "1962026656160185351301320480154111117132155";
@@ -1200,7 +1201,7 @@ namespace QuanLyQuanCafe
                 btnAddAccount.Text = "Lưu";
                 isFlagAccount = true;
                 int newID = Convert.ToInt32(acclist.Max(x => x.Id).ToString()) + 1;
-                txbAccountID.Text = newID.ToString();
+                txbAccountID.Text = newID.ToString(); 
             }
             else
             {
